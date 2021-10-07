@@ -1,4 +1,7 @@
+@import '../common/palette.scss';
+
 .grid-zone {
   width: 100%;
   height: 100%;
+  background-color: $mainBackgroundColor;
 }

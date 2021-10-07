@@ -1,9 +1,11 @@
 import { action, observable } from 'mobx';
-import { RandomUtils } from '../utils/RandomUtils';
 
+import { RandomUtils } from '../utils/RandomUtils';
+import { DetailsPanelState } from './DetailsPanelState';
 import { GridPlan } from './GridPlan';
 
 export class GridPlannerState {
+  public detailsPanelState = new DetailsPanelState();
   @observable public gridPlans: GridPlan[] = [];
   @observable.ref public selectedGridPlan?: GridPlan;
 

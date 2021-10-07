@@ -1,4 +1,5 @@
 import { action, observable } from 'mobx';
+import { Grid } from './Grid';
 
 /**
  * A GridPlan is made up of multiple grids; it's the higher level object that manages the grids within it.
@@ -6,6 +7,7 @@ import { action, observable } from 'mobx';
 export class GridPlan {
   public id: string;
   @observable public name: string;
+  @observable public grids: Grid[] = [];
 
   constructor(id: string, name: string) {
     this.id = id;

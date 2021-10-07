@@ -1,11 +1,14 @@
-import { Button, Intent, NonIdealState } from '@blueprintjs/core';
+import { NonIdealState } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
 import { GridPlannerState } from '../../state/GridPlannerState';
+import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
+import { DetailsNavbar } from './navbar/DetailsNavbar';
+import { DetailsPanelFocus } from '../../state/DetailsPanelState';
+import { HomeDetails } from './home-details/HomeDetails';
 
 import './details-panel.scss';
-import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
 
 interface Props {
   plannerState: GridPlannerState;
@@ -15,38 +18,43 @@ interface Props {
 export class DetailsPanel extends React.Component<Props> {
   public render() {
     const { plannerState } = this.props;
+    const { detailsPanelState } = plannerState;
 
     let panelContent: JSX.Element = undefined;
 
-    // User has a selected grid plan
-    if (plannerState.selectedGridPlan) {
-      panelContent = <GridPlanDetails gridPlan={plannerState.selectedGridPlan} />;
-    } else if (!plannerState.gridPlans.length) {
-      // User has no grid plans made
-      panelContent = this.renderNoGridPlanCta();
+    // What is the current focus for the details panel?
+    switch (detailsPanelState.focus) {
+      case DetailsPanelFocus.HOME:
+        panelContent = <HomeDetails plannerState={plannerState} />;
+        break;
+      case DetailsPanelFocus.GRID_PLAN:
+        if (plannerState.selectedGridPlan) {
+          panelContent = <GridPlanDetails gridPlan={plannerState.selectedGridPlan} />;
+        }
+        break;
     }
 
-    // User has no selected grid plan
-
-    return <div className={'details-panel'}>{panelContent}</div>;
-  }
-
-  private renderNoGridPlanCta() {
-    const { plannerState } = this.props;
+    // If no panel content by now, show error
+    if (panelContent === undefined) {
+      panelContent = this.renderPanelErrorState();
+    }
 
     return (
+      <div className={'details-panel'}>
+        <div className={'navbar'}>
+          <DetailsNavbar detailsState={plannerState.detailsPanelState} />
+        </div>
+        <div className={'panel-content'}>{panelContent}</div>
+      </div>
+    );
+  }
+
+  private renderPanelErrorState() {
+    return (
       <NonIdealState
-        icon={'layers'}
-        title={'No Grid Plans'}
-        description={'Click here to create a grid plan'}
-        action={
-          <Button
-            text={'Add grid plan'}
-            icon={'add'}
-            intent={Intent.PRIMARY}
-            onClick={() => plannerState.addGridPlan()}
-          />
-        }
+        icon={'error'}
+        title={'Uh oh!'}
+        description={'Something went wrong - try reloading the page'}
       />
     );
   }
