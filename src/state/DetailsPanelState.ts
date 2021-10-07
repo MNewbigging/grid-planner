@@ -1,5 +1,5 @@
-import { BreadcrumbProps } from '@blueprintjs/core';
-import { observable } from 'mobx';
+import { BreadcrumbProps, IconName } from '@blueprintjs/core';
+import { action, observable } from 'mobx';
 
 export enum DetailsPanelFocus {
   HOME = 'home',
@@ -20,10 +20,41 @@ export class DetailsPanelState {
     focus: DetailsPanelFocus.HOME,
     icon: 'home',
     text: 'Home',
-    onClick: () => console.log('home'),
+    onClick: () => this.changeFocus(DetailsPanelFocus.HOME),
   };
 
   constructor() {
     this.breadcrumbs.push(this.homeBreadcrumb);
+  }
+
+  @action public setNewFocus(text: string, focus: DetailsPanelFocus) {
+    // Create a new breadcrumb for the focus
+    const crumb: GPBreadcrumbProps = {
+      focus,
+      icon: this.getFocusIcon(focus),
+      text,
+      onClick: () => this.changeFocus(focus),
+    };
+
+    // Add it to other breadcrumbs, focus on it now
+    this.breadcrumbs.push(crumb);
+    this.changeFocus(focus);
+  }
+
+  @action private changeFocus(focus: DetailsPanelFocus) {
+    this.focus = focus;
+  }
+
+  private getFocusIcon(focus: DetailsPanelFocus): IconName {
+    switch (focus) {
+      case DetailsPanelFocus.HOME:
+        return 'home';
+      case DetailsPanelFocus.GRID_PLAN:
+        return 'layers';
+      case DetailsPanelFocus.GRID:
+        return 'grid-view';
+      case DetailsPanelFocus.GRID_CELL:
+        return 'new-grid-item';
+    }
   }
 }

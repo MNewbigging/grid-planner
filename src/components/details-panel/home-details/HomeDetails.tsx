@@ -22,6 +22,8 @@ export class HomeDetails extends React.Component<Props> {
       panelContent = this.renderNoGridPlanCta();
     }
 
+    // Otherwise, list all grid plans
+
     return <div className={'home-details'}>{panelContent}</div>;
   }
 
