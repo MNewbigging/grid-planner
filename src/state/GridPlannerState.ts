@@ -5,7 +5,7 @@ import { GridPlan } from './GridPlan';
 
 export class GridPlannerState {
   @observable public gridPlans: GridPlan[] = [];
-  @observable.ref public currentGridPlan?: GridPlan;
+  @observable.ref public selectedGridPlan?: GridPlan;
 
   @action public addGridPlan() {
     // Create a new grid plan
@@ -14,6 +14,6 @@ export class GridPlannerState {
 
     // Add it to all grid plans list, focus on it
     this.gridPlans.push(gridPlan);
-    this.currentGridPlan = gridPlan;
+    this.selectedGridPlan = gridPlan;
   }
 }

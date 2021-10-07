@@ -5,6 +5,7 @@ import React from 'react';
 import { GridPlannerState } from '../../state/GridPlannerState';
 
 import './details-panel.scss';
+import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
 
 interface Props {
   plannerState: GridPlannerState;
@@ -17,10 +18,15 @@ export class DetailsPanel extends React.Component<Props> {
 
     let panelContent: JSX.Element = undefined;
 
-    // User has no grid plans made
-    if (!plannerState.gridPlans.length) {
+    // User has a selected grid plan
+    if (plannerState.selectedGridPlan) {
+      panelContent = <GridPlanDetails gridPlan={plannerState.selectedGridPlan} />;
+    } else if (!plannerState.gridPlans.length) {
+      // User has no grid plans made
       panelContent = this.renderNoGridPlanCta();
     }
+
+    // User has no selected grid plan
 
     return <div className={'details-panel'}>{panelContent}</div>;
   }
@@ -30,7 +36,7 @@ export class DetailsPanel extends React.Component<Props> {
 
     return (
       <NonIdealState
-        icon={'clipboard'}
+        icon={'layers'}
         title={'No Grid Plans'}
         description={'Click here to create a grid plan'}
         action={
