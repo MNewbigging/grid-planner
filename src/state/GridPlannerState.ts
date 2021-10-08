@@ -12,19 +12,15 @@ export enum DetailsPanelFocus {
 
 export class GridPlannerState {
   @observable public detailsPanelFocus = DetailsPanelFocus.HOME;
-  @observable public gridPlans: GridPlan[] = [];
-  @observable.ref public selectedGridPlan?: GridPlan;
+  @observable.ref public gridPlan?: GridPlan;
 
-  @action public addGridPlan() {
+  @action public createGridPlan() {
     // Create a new grid plan
-    const gridPlanName = `grid_plan_${this.gridPlans.length + 1}`;
+    const gridPlanName = 'My grid plan';
     const gridPlan = new GridPlan(RandomUtils.createId(), gridPlanName);
 
-    // Add it to all grid plans list, select it
-    this.gridPlans.push(gridPlan);
-    this.selectedGridPlan = gridPlan;
-
-    // Focus on it in details panel
-    //this.detailsPanelState.setNewFocus(gridPlanName, DetailsPanelFocus.GRID_PLAN);
+    // Select it, focus on it
+    this.gridPlan = gridPlan;
+    this.detailsPanelFocus = DetailsPanelFocus.GRID_PLAN;
   }
 }

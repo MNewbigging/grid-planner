@@ -18,7 +18,7 @@ export class HomeDetails extends React.Component<Props> {
     let panelContent: JSX.Element = undefined;
 
     // Show a call to action if user has no grid plans
-    if (!plannerState.gridPlans.length) {
+    if (!plannerState.gridPlan) {
       panelContent = this.renderNoGridPlanCta();
     }
 
@@ -40,7 +40,7 @@ export class HomeDetails extends React.Component<Props> {
             text={'Add grid plan'}
             icon={'add'}
             intent={Intent.PRIMARY}
-            onClick={() => plannerState.addGridPlan()}
+            onClick={() => plannerState.createGridPlan()}
           />
         }
       />

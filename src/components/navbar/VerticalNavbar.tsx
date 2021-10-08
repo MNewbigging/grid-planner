@@ -11,7 +11,7 @@ interface Props {
 }
 
 @observer
-export class Navbar extends React.Component<Props> {
+export class VerticalNavbar extends React.Component<Props> {
   public render() {
     return (
       <div className={'vertical-navbar'}>
