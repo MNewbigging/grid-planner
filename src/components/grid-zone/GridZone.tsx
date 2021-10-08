@@ -30,7 +30,7 @@ export class GridZone extends React.Component<Props> {
       content = this.renderNoSelectedGridCta();
     } else {
       // There are grids to render
-      content = <GridRenderer gridPlan={gridPlan} />;
+      content = <GridRenderer grid={gridPlan.selectedGrid} />;
     }
 
     return (

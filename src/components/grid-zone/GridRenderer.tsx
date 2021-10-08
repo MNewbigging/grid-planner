@@ -1,17 +1,42 @@
 import { observer } from 'mobx-react';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
-import { GridPlan } from '../../state/GridPlan';
+import { Grid } from '../../state/Grid';
 
 import './grid-renderer.scss';
 
 interface Props {
-  gridPlan: GridPlan;
+  grid: Grid;
 }
 
 @observer
 export class GridRenderer extends React.Component<Props> {
   public render() {
-    return <div></div>;
+    const { grid } = this.props;
+
+    const cells: JSX.Element[] = [];
+
+    /**
+     * Iterate over grid.cells map and render a cell for each thing
+     * Set inline css for the parent; grid rows/columns based on grid
+     * properties for rows/cols/cellSize.
+     */
+
+    const gridCells = grid.cells.map((cell) => <div key={cell.id} className={'grid-cell'}></div>);
+
+    const gridContainerStyle: CSSProperties = {
+      gridTemplateColumns: `repeat(${grid.columns}, minmax(0, ${grid.cellSize}px))`,
+      gridTemplateRows: `repeat(${grid.rows}, minmax(0, ${grid.cellSize}px))`,
+    };
+
+    return (
+      <div className={'grid-renderer'}>
+        <div className={'grid-container'} style={gridContainerStyle}>
+          {gridCells}
+        </div>
+      </div>
+    );
   }
+
+  private renderGridRow() {}
 }
