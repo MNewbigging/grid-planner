@@ -16,12 +16,6 @@ export class GridRenderer extends React.Component<Props> {
 
     const cells: JSX.Element[] = [];
 
-    /**
-     * Iterate over grid.cells map and render a cell for each thing
-     * Set inline css for the parent; grid rows/columns based on grid
-     * properties for rows/cols/cellSize.
-     */
-
     const gridCells = grid.cells.map((cell) => <div key={cell.id} className={'grid-cell'}></div>);
 
     const gridContainerStyle: CSSProperties = {
@@ -37,6 +31,4 @@ export class GridRenderer extends React.Component<Props> {
       </div>
     );
   }
-
-  private renderGridRow() {}
 }

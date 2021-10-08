@@ -49,8 +49,7 @@ export class Grid {
     this.cellsMap.clear();
 
     for (let i = 0; i < this.columns * this.rows; i++) {
-      const cell = new GridCell(RandomUtils.createId());
-
+      const cell = new GridCell(RandomUtils.createId(12));
       this.cells.push(cell);
       this.cellsMap.set(cell.id, cell);
     }
