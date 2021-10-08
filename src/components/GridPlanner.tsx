@@ -1,3 +1,5 @@
+import { Button, Dialog, Icon, Intent } from '@blueprintjs/core';
+import { observer } from 'mobx-react';
 import React from 'react';
 
 import { GridPlannerState } from '../state/GridPlannerState';
@@ -6,8 +8,8 @@ import { GridZone } from './grid-zone/GridZone';
 import { VerticalNavbar } from './navbar/VerticalNavbar';
 
 import './grid-planner.scss';
-import { Button, Dialog, Icon, Intent } from '@blueprintjs/core';
 
+@observer
 export class GridPlanner extends React.Component {
   private readonly gridPlannerState = new GridPlannerState();
 
@@ -35,12 +37,17 @@ export class GridPlanner extends React.Component {
   private renderEntryDialog() {
     return (
       <div className={'grid-planner-entry'}>
-        <Dialog isOpen={true}>
+        <Dialog isOpen={this.gridPlannerState.gridPlan === undefined}>
           <div className={'entry-dialog'}>
             <Icon icon={'layers'} size={50} />
             <h3>Grid Planner</h3>
-            <p>Create a new grid, or choose a file to load</p>
-            <Button icon={'add'} text={'Create grid plan'} intent={Intent.PRIMARY} />
+            <p>Create a new grid plan, or load an existing one</p>
+            <Button
+              icon={'add'}
+              text={'Create grid plan'}
+              intent={Intent.PRIMARY}
+              onClick={() => this.gridPlannerState.createGridPlan()}
+            />
             <Button icon={'document-open'} text={'Load grid plan'} disabled />
           </div>
         </Dialog>

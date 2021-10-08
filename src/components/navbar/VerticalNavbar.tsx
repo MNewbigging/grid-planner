@@ -18,18 +18,10 @@ export class VerticalNavbar extends React.Component<Props> {
     return (
       <div className={'vertical-navbar'}>
         <Button
-          icon={'home'}
+          icon={'layers'}
           minimal
-          onClick={() => plannerState.setFocus(DetailsPanelFocus.HOME)}
+          onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_PLAN)}
         />
-
-        {plannerState.gridPlan && (
-          <Button
-            icon={'layers'}
-            minimal
-            onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_PLAN)}
-          />
-        )}
       </div>
     );
   }

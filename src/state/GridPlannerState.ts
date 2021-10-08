@@ -4,14 +4,13 @@ import { RandomUtils } from '../utils/RandomUtils';
 import { GridPlan } from './GridPlan';
 
 export enum DetailsPanelFocus {
-  HOME = 'home',
   GRID_PLAN = 'grid-plan',
   GRID = 'grid',
   GRID_CELL = 'grid-cell',
 }
 
 export class GridPlannerState {
-  @observable public detailsPanelFocus = DetailsPanelFocus.HOME;
+  @observable public detailsPanelFocus = DetailsPanelFocus.GRID_PLAN;
   @observable.ref public gridPlan?: GridPlan;
 
   @action public setFocus(focus: DetailsPanelFocus) {

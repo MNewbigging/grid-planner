@@ -21,6 +21,8 @@ export class GridPlanDetails extends React.Component<Props> {
     );
   }
 
+  private renderGridPlanProps() {}
+
   private renderGridPlanLayers() {
     const { gridPlan } = this.props;
 

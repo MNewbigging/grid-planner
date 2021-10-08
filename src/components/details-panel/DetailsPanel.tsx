@@ -4,10 +4,9 @@ import React from 'react';
 
 import { DetailsPanelFocus, GridPlannerState } from '../../state/GridPlannerState';
 import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
-import { HomeDetails } from './home-details/HomeDetails';
+import { DetailsPanelHeading, DetailsPanelHeadingProps } from '../common/DetailsPanelHeading';
 
 import './details-panel.scss';
-import { DetailsPanelHeading, DetailsPanelHeadingProps } from '../common/DetailsPanelHeading';
 
 interface Props {
   plannerState: GridPlannerState;
@@ -23,10 +22,6 @@ export class DetailsPanel extends React.Component<Props> {
 
     // What is the current focus for the details panel?
     switch (plannerState.detailsPanelFocus) {
-      case DetailsPanelFocus.HOME:
-        panelContent = <HomeDetails plannerState={plannerState} />;
-        headingProps = { text: 'Home', icon: 'home' };
-        break;
       case DetailsPanelFocus.GRID_PLAN:
         if (plannerState.gridPlan) {
           panelContent = <GridPlanDetails gridPlan={plannerState.gridPlan} />;
