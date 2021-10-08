@@ -25,14 +25,20 @@ export class DetailsPanel extends React.Component<Props> {
     switch (plannerState.detailsPanelFocus) {
       case DetailsPanelFocus.GRID_PLAN:
         if (plannerState.gridPlan) {
-          panelContent = <GridPlanDetails gridPlan={plannerState.gridPlan} />;
+          panelContent = (
+            <GridPlanDetails
+              gridPlan={plannerState.gridPlan}
+              setFocus={(focus: DetailsPanelFocus) => plannerState.setFocus(focus)}
+            />
+          );
           headingProps = { text: 'Grid plan', icon: 'layers' };
         }
         break;
       case DetailsPanelFocus.GRID:
-        if (plannerState.gridPlan.selectedGrid) {
-          panelContent = <GridDetails grid={plannerState.gridPlan.selectedGrid} />;
-          headingProps = { text: 'Grid', icon: 'grid-view' };
+        const grid = plannerState.gridPlan.selectedGrid;
+        if (grid) {
+          panelContent = <GridDetails grid={grid} />;
+          headingProps = { text: `Grid: ${grid.name}`, icon: 'grid-view' };
         }
         break;
     }

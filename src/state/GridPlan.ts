@@ -20,4 +20,8 @@ export class GridPlan {
     this.grids.push(grid);
     this.selectedGrid = grid;
   }
+
+  @action public selectGrid(id: string) {
+    this.selectedGrid = this.grids.find((grid) => grid.id === id);
+  }
 }

@@ -1,14 +1,16 @@
 import { Button, Intent } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { Grid } from '../../../state/Grid';
 
+import { Grid } from '../../../state/Grid';
 import { GridPlan } from '../../../state/GridPlan';
+import { DetailsPanelFocus } from '../../../state/GridPlannerState';
 
 import './grid-plan-details.scss';
 
 interface Props {
   gridPlan: GridPlan;
+  setFocus: (focus: DetailsPanelFocus) => void;
 }
 
 @observer
@@ -46,11 +48,19 @@ export class GridPlanDetails extends React.Component<Props> {
   }
 
   private renderGridItem(grid: Grid) {
+    const { gridPlan, setFocus } = this.props;
+
     return (
       <div key={grid.id} className={'grid-layer-item'}>
         <div className={'grid-name'}>{grid.name}</div>
         <div className={'grid-actions'}>
-          <Button icon={'edit'} />
+          <Button
+            icon={'edit'}
+            onClick={() => {
+              gridPlan.selectGrid(grid.id);
+              setFocus(DetailsPanelFocus.GRID);
+            }}
+          />
           <Button icon={'trash'} />
         </div>
       </div>
