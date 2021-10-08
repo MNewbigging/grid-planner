@@ -1,6 +1,7 @@
-import { Button, FormGroup, InputGroup, Intent, NonIdealState } from '@blueprintjs/core';
+import { Button, Intent } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { Grid } from '../../../state/Grid';
 
 import { GridPlan } from '../../../state/GridPlan';
 
@@ -28,19 +29,31 @@ export class GridPlanDetails extends React.Component<Props> {
     );
   }
 
-  private renderGridPlanProps() {}
-
   private renderGridPlanLayers() {
     const { gridPlan } = this.props;
 
-    const layers = gridPlan.grids.map((grid) => (
-      <div className={'grid-layer-item'}>{grid.name}</div>
-    ));
+    const layers = gridPlan.grids.map((grid) => this.renderGridItem(grid));
 
     if (!layers.length) {
-      layers.push(<div className={'no-grids-item'}>No grids!</div>);
+      layers.push(
+        <div key={'no-grid-item'} className={'no-grids-item'}>
+          No grids!
+        </div>
+      );
     }
 
     return <div className={'grid-layer-list'}>{layers}</div>;
+  }
+
+  private renderGridItem(grid: Grid) {
+    return (
+      <div key={grid.id} className={'grid-layer-item'}>
+        <div className={'grid-name'}>{grid.name}</div>
+        <div className={'grid-actions'}>
+          <Button icon={'edit'} />
+          <Button icon={'trash'} />
+        </div>
+      </div>
+    );
   }
 }

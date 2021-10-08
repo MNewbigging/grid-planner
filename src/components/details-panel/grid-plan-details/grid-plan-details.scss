@@ -6,7 +6,7 @@
 
   .grid-layer-list {
     width: 100%;
-    min-height: 36px;
+    min-height: 38px;
     border-radius: 5px;
     border: 1px solid $mainBorderColor;
     padding: 2px;
@@ -26,7 +26,7 @@
     }
 
     .grid-layer-item {
-      height: 30px;
+      height: 34px;
       border-radius: 3px;
       padding: 2px;
 
@@ -35,6 +35,21 @@
 
       &:hover {
         background-color: $mainBackgroundColor;
+        .grid-actions {
+          visibility: visible;
+        }
+      }
+
+      .grid-name {
+        flex: 1 1 auto;
+      }
+
+      .grid-actions {
+        visibility: hidden;
+        flex: 0 0 auto;
+
+        display: flex;
+        gap: 2px;
       }
     }
   }

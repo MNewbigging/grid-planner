@@ -1,4 +1,5 @@
 import { action, observable } from 'mobx';
+import { RandomUtils } from '../utils/RandomUtils';
 import { Grid } from './Grid';
 
 /**
@@ -15,7 +16,7 @@ export class GridPlan {
 
   @action public addGrid() {
     const gridName = `Grid ${this.grids.length}`;
-    const grid = new Grid(gridName);
+    const grid = new Grid(RandomUtils.createId(), gridName);
     this.grids.push(grid);
     this.selectedGrid = grid;
   }
