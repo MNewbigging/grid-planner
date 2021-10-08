@@ -35,7 +35,7 @@ export class GridZone extends React.Component<Props> {
 
     return (
       <div className={'grid-zone'}>
-        <div className={'grid-zone-toolbar'}>
+        <div className={'grid-zone-toolbar-area'}>
           {!noGrids && <GridZoneToolbar gridPlan={gridPlan} />}
         </div>
         <div className={'grid-zone-content'}>{content}</div>

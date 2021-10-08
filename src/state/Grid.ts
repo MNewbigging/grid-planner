@@ -26,6 +26,24 @@ export class Grid {
     }
   }
 
+  @action public setRows(rows: string) {
+    const value = parseInt(rows, 10);
+    if (value) {
+      this.rows = value;
+    }
+
+    this.createCells();
+  }
+
+  @action public setColumns(columns: string) {
+    const value = parseInt(columns, 10);
+    if (value) {
+      this.columns = value;
+    }
+
+    this.createCells();
+  }
+
   @action private createCells() {
     this.cells = [];
     this.cellsMap.clear();

@@ -8,10 +8,12 @@
 
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
   align-items: center;
 
   .grid-container {
+    flex-shrink: 0;
+    margin: auto;
+
     display: grid;
     border-top: 1px solid $gridBorderColour;
     border-left: 1px solid $gridBorderColour;
