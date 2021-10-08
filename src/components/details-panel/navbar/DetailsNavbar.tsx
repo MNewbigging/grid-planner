@@ -13,6 +13,13 @@ export class DetailsNavbar extends React.Component<Props> {
   public render() {
     const { detailsState } = this.props;
 
+    /**
+     * TODO
+     * This isn't re-rendering when I push to breadcrumbs - but it does when I add
+     * a length check (but still doesn't show the new crumb...)
+     */
+    console.log('crumb render: ', detailsState.breadcrumbs);
+
     return (
       <Navbar>
         <Navbar.Group align={Alignment.LEFT}>

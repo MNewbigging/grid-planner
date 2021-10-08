@@ -4,6 +4,10 @@
 
   display: flex;
 
+  .navbar-area {
+    flex: 0 0 60px;
+  }
+
   .details-panel-area {
     flex: 0 0 300px;
   }
