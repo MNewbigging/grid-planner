@@ -17,4 +17,9 @@ export class GridPlan {
   @action public setName(name: string) {
     this.name = name;
   }
+
+  @action public addGrid() {
+    const gridName = `Grid ${this.grids.length}`;
+    this.grids.push(new Grid(gridName));
+  }
 }

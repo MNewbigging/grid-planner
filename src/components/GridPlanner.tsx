@@ -28,7 +28,7 @@ export class GridPlanner extends React.Component {
           <DetailsPanel plannerState={this.gridPlannerState} />
         </div>
         <div className={'grid-zone-area'}>
-          <GridZone />
+          <GridZone gridPlan={this.gridPlannerState.gridPlan} />
         </div>
       </div>
     );

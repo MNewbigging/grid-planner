@@ -13,9 +13,16 @@ interface Props {
 @observer
 export class GridPlanDetails extends React.Component<Props> {
   public render() {
+    const { gridPlan } = this.props;
+
     return (
       <div className={'grid-plan-details'}>
-        <Button icon={'add'} text={'Add grid'} intent={Intent.PRIMARY} />
+        <Button
+          icon={'add'}
+          text={'Add grid'}
+          intent={Intent.PRIMARY}
+          onClick={() => gridPlan.addGrid()}
+        />
         {this.renderGridPlanLayers()}
       </div>
     );
