@@ -19,8 +19,7 @@ export class GridPlannerState {
 
   @action public createGridPlan() {
     // Create a new grid plan
-    const gridPlanName = 'My grid plan';
-    const gridPlan = new GridPlan(RandomUtils.createId(), gridPlanName);
+    const gridPlan = new GridPlan(RandomUtils.createId());
 
     // Select it, focus on it
     this.gridPlan = gridPlan;

@@ -38,23 +38,9 @@ export class GridPlanDetails extends React.Component<Props> {
     ));
 
     if (!layers.length) {
-      layers.push(<div className={'grid-layer-item'}>No grids!</div>);
+      layers.push(<div className={'no-grids-item'}>No grids!</div>);
     }
 
     return <div className={'grid-layer-list'}>{layers}</div>;
-  }
-
-  private renderGridPlanNameInput() {
-    const { gridPlan } = this.props;
-
-    return (
-      <FormGroup label={'Grid plan name'} labelFor={'grid-plan-name'}>
-        <InputGroup
-          id={'grid-plan-name'}
-          value={gridPlan.name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => gridPlan.setName(e.target.value)}
-        />
-      </FormGroup>
-    );
   }
 }

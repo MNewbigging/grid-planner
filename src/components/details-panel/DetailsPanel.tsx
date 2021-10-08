@@ -7,6 +7,7 @@ import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
 import { DetailsPanelHeading, DetailsPanelHeadingProps } from '../common/DetailsPanelHeading';
 
 import './details-panel.scss';
+import { GridDetails } from './grid-details/GridDetails';
 
 interface Props {
   plannerState: GridPlannerState;
@@ -26,6 +27,12 @@ export class DetailsPanel extends React.Component<Props> {
         if (plannerState.gridPlan) {
           panelContent = <GridPlanDetails gridPlan={plannerState.gridPlan} />;
           headingProps = { text: 'Grid plan', icon: 'layers' };
+        }
+        break;
+      case DetailsPanelFocus.GRID:
+        if (plannerState.gridPlan.selectedGrid) {
+          panelContent = <GridDetails grid={plannerState.gridPlan.selectedGrid} />;
+          headingProps = { text: 'Grid', icon: 'grid-view' };
         }
         break;
     }

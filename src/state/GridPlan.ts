@@ -6,17 +6,11 @@ import { Grid } from './Grid';
  */
 export class GridPlan {
   public id: string;
-  @observable public name: string;
   @observable public grids: Grid[] = [];
   @observable public selectedGrid?: Grid;
 
-  constructor(id: string, name: string) {
+  constructor(id: string) {
     this.id = id;
-    this.name = name;
-  }
-
-  @action public setName(name: string) {
-    this.name = name;
   }
 
   @action public addGrid() {
