@@ -20,6 +20,9 @@ export class HomeDetails extends React.Component<Props> {
     // Show a call to action if user has no grid plans
     if (!plannerState.gridPlan) {
       panelContent = this.renderNoGridPlanCta();
+    } else {
+      // Or show details of current grid plan
+      panelContent = this.renderGridPlanInfo();
     }
 
     return <div className={'home-details'}>{panelContent}</div>;
@@ -45,6 +48,16 @@ export class HomeDetails extends React.Component<Props> {
           </>
         }
       />
+    );
+  }
+
+  private renderGridPlanInfo() {
+    const { plannerState } = this.props;
+
+    return (
+      <div className={'grid-plan-info'}>
+        <Text>Grid plan info:</Text>
+      </div>
     );
   }
 }

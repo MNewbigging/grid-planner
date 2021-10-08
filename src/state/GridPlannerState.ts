@@ -14,6 +14,10 @@ export class GridPlannerState {
   @observable public detailsPanelFocus = DetailsPanelFocus.HOME;
   @observable.ref public gridPlan?: GridPlan;
 
+  @action public setFocus(focus: DetailsPanelFocus) {
+    this.detailsPanelFocus = focus;
+  }
+
   @action public createGridPlan() {
     // Create a new grid plan
     const gridPlanName = 'My grid plan';

@@ -30,6 +30,7 @@ export class DetailsPanel extends React.Component<Props> {
       case DetailsPanelFocus.GRID_PLAN:
         if (plannerState.gridPlan) {
           panelContent = <GridPlanDetails gridPlan={plannerState.gridPlan} />;
+          headingProps = { text: 'Grid plan', icon: 'layers' };
         }
         break;
     }
