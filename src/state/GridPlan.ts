@@ -25,6 +25,10 @@ export class GridPlan {
     this.selectedGrid = this.grids.find((grid) => grid.id === id);
   }
 
+  @action public selectGridByIndex(index: number) {
+    this.selectedGrid = this.grids[index];
+  }
+
   @action public deleteGrid(id: string) {
     this.grids = this.grids.filter((grid) => grid.id !== id);
 

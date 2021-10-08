@@ -5,6 +5,8 @@ import { GridPlan } from '../../state/GridPlan';
 import { DetailsPanelFocus } from '../../state/GridPlannerState';
 
 import './grid-zone.scss';
+import { GridRenderer } from './GridRenderer';
+import { GridZoneToolbar } from './GridZoneToolbar';
 
 interface Props {
   gridPlan: GridPlan;
@@ -18,15 +20,27 @@ export class GridZone extends React.Component<Props> {
 
     let content: JSX.Element = undefined;
 
+    const noGrids = !gridPlan.grids.length;
+
     // No grids, show call to action
-    if (!gridPlan.grids.length) {
+    if (noGrids) {
       content = this.renderNoGridsCta();
       // No selected grid
     } else if (gridPlan.selectedGrid === undefined) {
       content = this.renderNoSelectedGridCta();
+    } else {
+      // There are grids to render
+      content = <GridRenderer gridPlan={gridPlan} />;
     }
 
-    return <div className={'grid-zone'}>{content}</div>;
+    return (
+      <div className={'grid-zone'}>
+        <div className={'grid-zone-toolbar'}>
+          {!noGrids && <GridZoneToolbar gridPlan={gridPlan} />}
+        </div>
+        <div className={'grid-zone-content'}>{content}</div>
+      </div>
+    );
   }
 
   private renderNoGridsCta() {
