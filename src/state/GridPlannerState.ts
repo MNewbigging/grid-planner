@@ -1,11 +1,17 @@
 import { action, observable } from 'mobx';
 
 import { RandomUtils } from '../utils/RandomUtils';
-import { DetailsPanelFocus, DetailsPanelState } from './DetailsPanelState';
 import { GridPlan } from './GridPlan';
 
+export enum DetailsPanelFocus {
+  HOME = 'home',
+  GRID_PLAN = 'grid-plan',
+  GRID = 'grid',
+  GRID_CELL = 'grid-cell',
+}
+
 export class GridPlannerState {
-  public detailsPanelState = new DetailsPanelState();
+  @observable public detailsPanelFocus = DetailsPanelFocus.HOME;
   @observable public gridPlans: GridPlan[] = [];
   @observable.ref public selectedGridPlan?: GridPlan;
 
@@ -19,6 +25,6 @@ export class GridPlannerState {
     this.selectedGridPlan = gridPlan;
 
     // Focus on it in details panel
-    this.detailsPanelState.setNewFocus(gridPlanName, DetailsPanelFocus.GRID_PLAN);
+    //this.detailsPanelState.setNewFocus(gridPlanName, DetailsPanelFocus.GRID_PLAN);
   }
 }

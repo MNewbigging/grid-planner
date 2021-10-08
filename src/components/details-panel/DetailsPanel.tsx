@@ -2,10 +2,8 @@ import { NonIdealState } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { GridPlannerState } from '../../state/GridPlannerState';
+import { DetailsPanelFocus, GridPlannerState } from '../../state/GridPlannerState';
 import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
-import { DetailsNavbar } from './navbar/DetailsNavbar';
-import { DetailsPanelFocus } from '../../state/DetailsPanelState';
 import { HomeDetails } from './home-details/HomeDetails';
 
 import './details-panel.scss';
@@ -18,12 +16,11 @@ interface Props {
 export class DetailsPanel extends React.Component<Props> {
   public render() {
     const { plannerState } = this.props;
-    const { detailsPanelState } = plannerState;
 
     let panelContent: JSX.Element = undefined;
 
     // What is the current focus for the details panel?
-    switch (detailsPanelState.focus) {
+    switch (plannerState.detailsPanelFocus) {
       case DetailsPanelFocus.HOME:
         panelContent = <HomeDetails plannerState={plannerState} />;
         break;
@@ -41,9 +38,7 @@ export class DetailsPanel extends React.Component<Props> {
 
     return (
       <div className={'details-panel'}>
-        <div className={'navbar'}>
-          <DetailsNavbar detailsState={plannerState.detailsPanelState} />
-        </div>
+        <div className={'panel-heading'}></div>
         <div className={'panel-content'}>{panelContent}</div>
       </div>
     );
