@@ -1,4 +1,4 @@
-import { Button, Intent, NonIdealState } from '@blueprintjs/core';
+import { Button, Intent, NonIdealState, Text } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
@@ -22,8 +22,6 @@ export class HomeDetails extends React.Component<Props> {
       panelContent = this.renderNoGridPlanCta();
     }
 
-    // Otherwise, list all grid plans
-
     return <div className={'home-details'}>{panelContent}</div>;
   }
 
@@ -34,14 +32,17 @@ export class HomeDetails extends React.Component<Props> {
       <NonIdealState
         icon={'layers'}
         title={'No Grid Plans'}
-        description={'Click here to create a grid plan'}
+        description={'You can create or load one here'}
         action={
-          <Button
-            text={'Add grid plan'}
-            icon={'add'}
-            intent={Intent.PRIMARY}
-            onClick={() => plannerState.createGridPlan()}
-          />
+          <>
+            <Button
+              text={'Create grid plan'}
+              icon={'add'}
+              intent={Intent.PRIMARY}
+              onClick={() => plannerState.createGridPlan()}
+            />
+            <Button text={'Load grid plan'} icon={'document-open'} disabled />
+          </>
         }
       />
     );
