@@ -24,4 +24,12 @@ export class GridPlan {
   @action public selectGrid(id: string) {
     this.selectedGrid = this.grids.find((grid) => grid.id === id);
   }
+
+  @action public deleteGrid(id: string) {
+    this.grids = this.grids.filter((grid) => grid.id !== id);
+
+    if (this.selectedGrid?.id === id) {
+      this.selectedGrid = undefined;
+    }
+  }
 }

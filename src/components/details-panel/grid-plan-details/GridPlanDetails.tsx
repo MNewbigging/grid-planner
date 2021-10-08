@@ -52,7 +52,9 @@ export class GridPlanDetails extends React.Component<Props> {
 
     return (
       <div key={grid.id} className={'grid-layer-item'}>
-        <div className={'grid-name'}>{grid.name}</div>
+        <div className={'grid-name'} onClick={() => gridPlan.selectGrid(grid.id)}>
+          {grid.name}
+        </div>
         <div className={'grid-actions'}>
           <Button
             icon={'edit'}
@@ -61,7 +63,7 @@ export class GridPlanDetails extends React.Component<Props> {
               setFocus(DetailsPanelFocus.GRID);
             }}
           />
-          <Button icon={'trash'} />
+          <Button icon={'trash'} onClick={() => gridPlan.deleteGrid(grid.id)} />
         </div>
       </div>
     );
