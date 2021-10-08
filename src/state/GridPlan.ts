@@ -8,6 +8,7 @@ export class GridPlan {
   public id: string;
   @observable public name: string;
   @observable public grids: Grid[] = [];
+  @observable public selectedGrid?: Grid;
 
   constructor(id: string, name: string) {
     this.id = id;
@@ -20,6 +21,8 @@ export class GridPlan {
 
   @action public addGrid() {
     const gridName = `Grid ${this.grids.length}`;
-    this.grids.push(new Grid(gridName));
+    const grid = new Grid(gridName);
+    this.grids.push(grid);
+    this.selectedGrid = grid;
   }
 }

@@ -2,7 +2,7 @@ import { Button, Dialog, Icon, Intent } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { GridPlannerState } from '../state/GridPlannerState';
+import { DetailsPanelFocus, GridPlannerState } from '../state/GridPlannerState';
 import { DetailsPanel } from './details-panel/DetailsPanel';
 import { GridZone } from './grid-zone/GridZone';
 import { VerticalNavbar } from './navbar/VerticalNavbar';
@@ -28,7 +28,10 @@ export class GridPlanner extends React.Component {
           <DetailsPanel plannerState={this.gridPlannerState} />
         </div>
         <div className={'grid-zone-area'}>
-          <GridZone gridPlan={this.gridPlannerState.gridPlan} />
+          <GridZone
+            gridPlan={this.gridPlannerState.gridPlan}
+            setFocus={(focus: DetailsPanelFocus) => this.gridPlannerState.setFocus(focus)}
+          />
         </div>
       </div>
     );
