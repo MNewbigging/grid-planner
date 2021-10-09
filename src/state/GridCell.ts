@@ -9,6 +9,9 @@ export class GridCell {
 
   constructor(id: string) {
     this.id = id;
+
+    // Default background colour
+    this.settings.backgroundColor = 'white';
   }
 
   @action public setBackgroundColor = (color: ColorResult) => {

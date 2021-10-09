@@ -28,14 +28,9 @@ export class GridRenderer extends React.Component<Props> {
       />
     ));
 
-    const gridContainerStyle: CSSProperties = {
-      gridTemplateColumns: `repeat(${grid.columns}, minmax(0, ${grid.cellSize}px))`,
-      gridTemplateRows: `repeat(${grid.rows}, minmax(0, ${grid.cellSize}px))`,
-    };
-
     return (
       <div className={'grid-renderer'}>
-        <div className={'grid-container'} style={gridContainerStyle}>
+        <div className={'grid-container'} style={{ ...grid.settings }}>
           {gridCells}
         </div>
       </div>
