@@ -20,8 +20,6 @@ export class GridDetails extends React.Component<Props> {
   public render() {
     const { grid } = this.props;
 
-    console.log('grid details render. Loading: ', this.dimensionsApplyLoading);
-
     return (
       <div className={'grid-details'}>
         <FormGroup label={'Grid name'} labelFor={'grid-name'}>

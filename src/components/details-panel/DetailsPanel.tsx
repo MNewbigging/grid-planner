@@ -8,6 +8,7 @@ import { DetailsPanelHeading, DetailsPanelHeadingProps } from '../common/Details
 import { GridDetails } from './grid-details/GridDetails';
 
 import './details-panel.scss';
+import { GridCellDetails } from './grid-cell-details/GridCellDetails';
 
 interface Props {
   plannerState: GridPlannerState;
@@ -34,13 +35,20 @@ export class DetailsPanel extends React.Component<Props> {
           headingProps = { text: 'Grid plan', icon: 'layers' };
         }
         break;
-      case DetailsPanelFocus.GRID:
+      case DetailsPanelFocus.GRID: {
         const grid = plannerState.gridPlan.selectedGrid;
         if (grid) {
           panelContent = <GridDetails grid={grid} />;
           headingProps = { text: `Grid: ${grid.name}`, icon: 'grid-view' };
         }
         break;
+      }
+      case DetailsPanelFocus.GRID_CELL: {
+        const grid = plannerState.gridPlan.selectedGrid;
+        panelContent = <GridCellDetails />;
+        headingProps = { text: `${grid.name} cell`, icon: 'new-grid-item' };
+        break;
+      }
     }
 
     // If no panel content by now, show error

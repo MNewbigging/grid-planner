@@ -1,20 +1,32 @@
 import { observer } from 'mobx-react';
 import React, { CSSProperties } from 'react';
 
-import { Grid } from '../../state/Grid';
+import { Grid } from '../../../state/Grid';
+import { GridCellDisplay } from './GridCellDisplay';
+import { DetailsPanelFocus } from '../../../state/GridPlannerState';
 
 import './grid-renderer.scss';
 
 interface Props {
   grid: Grid;
+  setFocus: (focus: DetailsPanelFocus) => void;
 }
 
 @observer
 export class GridRenderer extends React.Component<Props> {
   public render() {
-    const { grid } = this.props;
+    const { grid, setFocus } = this.props;
 
-    const gridCells = grid.cells.map((cell) => <div key={cell.id} className={'grid-cell'}></div>);
+    const gridCells = grid.cells.map((cell) => (
+      <GridCellDisplay
+        key={cell.id}
+        gridCell={cell}
+        onClick={() => {
+          grid.selectCell(cell);
+          setFocus(DetailsPanelFocus.GRID_CELL);
+        }}
+      />
+    ));
 
     const gridContainerStyle: CSSProperties = {
       gridTemplateColumns: `repeat(${grid.columns}, minmax(0, ${grid.cellSize}px))`,

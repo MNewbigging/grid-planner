@@ -5,7 +5,7 @@ import { GridPlan } from '../../state/GridPlan';
 import { DetailsPanelFocus } from '../../state/GridPlannerState';
 
 import './grid-zone.scss';
-import { GridRenderer } from './GridRenderer';
+import { GridRenderer } from './renderer/GridRenderer';
 import { GridZoneToolbar } from './GridZoneToolbar';
 
 interface Props {
@@ -30,7 +30,7 @@ export class GridZone extends React.Component<Props> {
       content = this.renderNoSelectedGridCta();
     } else {
       // There are grids to render
-      content = <GridRenderer grid={gridPlan.selectedGrid} />;
+      content = <GridRenderer grid={gridPlan.selectedGrid} setFocus={setFocus} />;
     }
 
     return (

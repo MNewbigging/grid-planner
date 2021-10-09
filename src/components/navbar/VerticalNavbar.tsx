@@ -30,6 +30,14 @@ export class VerticalNavbar extends React.Component<Props> {
             onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID)}
           />
         )}
+
+        {plannerState.gridPlan?.selectedGrid?.selectedCell && (
+          <Button
+            icon={'new-grid-item'}
+            minimal
+            onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_CELL)}
+          />
+        )}
       </div>
     );
   }

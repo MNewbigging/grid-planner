@@ -12,6 +12,7 @@ export class Grid {
   @observable public cells: GridCell[] = [];
   // For accessing & mutating quickly
   @observable public cellsMap = new Map<string, GridCell>();
+  @observable.ref public selectedCell?: GridCell;
 
   constructor(id: string, name: string) {
     this.id = id;
@@ -47,5 +48,9 @@ export class Grid {
     this.columns = columns;
     this.cells = tempCells;
     this.cellsMap = tempCellsMap;
+  }
+
+  @action public selectCell(cell: GridCell) {
+    this.selectedCell = cell;
   }
 }
