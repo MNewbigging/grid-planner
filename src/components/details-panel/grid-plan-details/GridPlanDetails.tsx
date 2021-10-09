@@ -1,4 +1,4 @@
-import { Button, Intent } from '@blueprintjs/core';
+import { Button, Intent, Label } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
@@ -20,6 +20,7 @@ export class GridPlanDetails extends React.Component<Props> {
 
     return (
       <div className={'grid-plan-details'}>
+        <Label>Grids</Label>
         <Button
           icon={'add'}
           text={'Add grid'}

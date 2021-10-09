@@ -16,7 +16,7 @@ interface Props {
 @observer
 export class GridZone extends React.Component<Props> {
   public render() {
-    const { gridPlan } = this.props;
+    const { gridPlan, setFocus } = this.props;
 
     let content: JSX.Element = undefined;
 
@@ -36,7 +36,7 @@ export class GridZone extends React.Component<Props> {
     return (
       <div className={'grid-zone'}>
         <div className={'grid-zone-toolbar-area'}>
-          {!noGrids && <GridZoneToolbar gridPlan={gridPlan} />}
+          {!noGrids && <GridZoneToolbar gridPlan={gridPlan} setFocus={setFocus} />}
         </div>
         <div className={'grid-zone-content'}>{content}</div>
       </div>

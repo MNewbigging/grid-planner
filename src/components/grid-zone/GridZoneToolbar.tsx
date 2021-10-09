@@ -3,17 +3,19 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { GridPlan } from '../../state/GridPlan';
+import { DetailsPanelFocus } from '../../state/GridPlannerState';
 
 import './grid-zone-toolbar.scss';
 
 interface Props {
   gridPlan: GridPlan;
+  setFocus: (focus: DetailsPanelFocus) => void;
 }
 
 @observer
 export class GridZoneToolbar extends React.Component<Props> {
   public render() {
-    const { gridPlan } = this.props;
+    const { gridPlan, setFocus } = this.props;
 
     const currentGrid = gridPlan.selectedGrid;
 
@@ -34,7 +36,9 @@ export class GridZoneToolbar extends React.Component<Props> {
             disabled={disableLast}
             onClick={() => gridPlan.selectGridByIndex(lastIndex)}
           />
-          <Text className={'selected-grid-name'}>{currentGrid.name}</Text>
+          <Text className={'selected-grid-name'} onClick={() => setFocus(DetailsPanelFocus.GRID)}>
+            {currentGrid.name}
+          </Text>
           <Button
             icon={'chevron-right'}
             minimal
