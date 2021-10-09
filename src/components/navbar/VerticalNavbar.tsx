@@ -15,12 +15,15 @@ export class VerticalNavbar extends React.Component<Props> {
   public render() {
     const { plannerState } = this.props;
 
+    const focus = plannerState.detailsPanelFocus;
+
     return (
       <div className={'vertical-navbar'}>
         <Button
           icon={'layers'}
           minimal
           onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_PLAN)}
+          outlined={focus === DetailsPanelFocus.GRID_PLAN}
         />
 
         {plannerState.gridPlan?.selectedGrid && (
@@ -28,6 +31,7 @@ export class VerticalNavbar extends React.Component<Props> {
             icon={'grid-view'}
             minimal
             onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID)}
+            outlined={focus === DetailsPanelFocus.GRID}
           />
         )}
 
@@ -36,6 +40,7 @@ export class VerticalNavbar extends React.Component<Props> {
             icon={'new-grid-item'}
             minimal
             onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_CELL)}
+            outlined={focus === DetailsPanelFocus.GRID_CELL}
           />
         )}
       </div>
