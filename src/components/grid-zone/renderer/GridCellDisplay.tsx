@@ -1,4 +1,5 @@
-import React, { CSSProperties } from 'react';
+import { observer } from 'mobx-react';
+import React from 'react';
 
 import { GridCell } from '../../../state/GridCell';
 
@@ -9,6 +10,7 @@ interface Props {
   onClick: () => void;
 }
 
+@observer
 export class GridCellDisplay extends React.Component<Props> {
   public render() {
     const { gridCell, onClick } = this.props;

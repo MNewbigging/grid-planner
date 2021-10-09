@@ -3,4 +3,10 @@
   flex-direction: column;
   flex-wrap: nowrap;
   gap: 5px;
+
+  .color-picker {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 }

@@ -45,8 +45,10 @@ export class DetailsPanel extends React.Component<Props> {
       }
       case DetailsPanelFocus.GRID_CELL: {
         const grid = plannerState.gridPlan.selectedGrid;
-        panelContent = <GridCellDetails />;
-        headingProps = { text: `${grid.name} cell`, icon: 'new-grid-item' };
+        if (grid.selectedCell) {
+          panelContent = <GridCellDetails gridCell={grid.selectedCell} />;
+          headingProps = { text: `${grid.name} cell`, icon: 'new-grid-item' };
+        }
         break;
       }
     }

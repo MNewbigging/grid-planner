@@ -1,5 +1,6 @@
 import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
+import { Color, ColorResult } from 'react-color';
 
 export class GridCell {
   public id: string;
@@ -10,7 +11,8 @@ export class GridCell {
     this.id = id;
   }
 
-  @action public setBackgroundColor(color: string) {
-    this.settings.backgroundColor = color;
-  }
+  @action public setBackgroundColor = (color: ColorResult) => {
+    const rgba = color.rgb;
+    this.settings.backgroundColor = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+  };
 }
