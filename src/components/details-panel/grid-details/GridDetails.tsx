@@ -37,7 +37,7 @@ export class GridDetails extends React.Component<Props> {
             Rows
             <NumericInput
               id={'grid-rows'}
-              defaultValue={grid.rows.toString()}
+              defaultValue={grid.rows}
               onBlur={this.setRows}
               buttonPosition={'none'}
             />
@@ -47,7 +47,7 @@ export class GridDetails extends React.Component<Props> {
             Columns
             <NumericInput
               id={'grid-columns'}
-              defaultValue={grid.columns.toString()}
+              defaultValue={grid.columns}
               onBlur={this.setColumns}
               buttonPosition={'none'}
             />
@@ -58,6 +58,15 @@ export class GridDetails extends React.Component<Props> {
             disabled={!this.dimensionsApply}
             onClick={this.applyDimensions}
             loading={this.dimensionsApplyLoading}
+          />
+        </FormGroup>
+
+        <FormGroup label={'Grid cell size'} labelFor={'cell-size'}>
+          <NumericInput
+            id={'cell-size'}
+            defaultValue={grid.cellSize}
+            buttonPosition={'none'}
+            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => grid.setCellSize(e.target.value)}
           />
         </FormGroup>
       </div>

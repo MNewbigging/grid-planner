@@ -5,9 +5,9 @@ import React from 'react';
 import { DetailsPanelFocus, GridPlannerState } from '../../state/GridPlannerState';
 import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
 import { DetailsPanelHeading, DetailsPanelHeadingProps } from '../common/DetailsPanelHeading';
+import { GridDetails } from './grid-details/GridDetails';
 
 import './details-panel.scss';
-import { GridDetails } from './grid-details/GridDetails';
 
 interface Props {
   plannerState: GridPlannerState;

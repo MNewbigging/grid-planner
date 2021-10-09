@@ -26,6 +26,13 @@ export class Grid {
     }
   }
 
+  @action public setCellSize(size: string) {
+    const value = parseInt(size, 10);
+    if (value && value > 0) {
+      this.cellSize = value;
+    }
+  }
+
   @action public async createCells(rows: number, columns: number) {
     const tempCells: GridCell[] = [];
     const tempCellsMap = new Map<string, GridCell>();
