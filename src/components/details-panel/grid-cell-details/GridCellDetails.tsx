@@ -5,6 +5,7 @@ import React from 'react';
 
 import { Color, ColorResult, SketchPicker } from 'react-color';
 import { GridCell } from '../../../state/GridCell';
+import { ColorPicker } from '../../common/color-picker/ColorPicker';
 
 import './grid-cell-details.scss';
 
@@ -19,24 +20,11 @@ export class GridCellDetails extends React.Component<Props> {
 
     return (
       <div className={'grid-cell-details'}>
-        {this.renderColorPicker(
-          'Fill',
-          gridCell.settings.backgroundColor,
-          gridCell.setBackgroundColor
-        )}
-      </div>
-    );
-  }
-
-  private renderColorPicker(label: string, color: string, setColor: (color: ColorResult) => void) {
-    const { gridCell } = this.props;
-
-    return (
-      <div className={'color-picker'}>
-        {label}
-        <Popover2 content={<SketchPicker color={color} onChange={setColor} />}>
-          <Button outlined style={{ backgroundColor: gridCell.settings.backgroundColor }} />
-        </Popover2>
+        <ColorPicker
+          label={'Fill'}
+          color={gridCell.settings.backgroundColor}
+          setColor={gridCell.setBackgroundColor}
+        />
       </div>
     );
   }
