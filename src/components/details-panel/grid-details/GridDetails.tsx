@@ -76,6 +76,12 @@ export class GridDetails extends React.Component<Props> {
             checked={grid.showGridLines}
             onChange={grid.toggleGridLines}
           />
+          <Switch
+            label={'Show grid gaps'}
+            alignIndicator={'left'}
+            checked={grid.showGridGap}
+            onChange={grid.toggleGridGap}
+          />
         </FormGroup>
       </div>
     );

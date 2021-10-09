@@ -10,6 +10,7 @@ export class Grid {
   public columns: number = 5;
   public cellSize: number = 30;
   @observable public showGridLines = true;
+  @observable public showGridGap = true;
   @observable public cells: GridCell[] = [];
   @observable.ref public selectedCell?: GridCell;
   @observable public settings: CSSProperties = {
@@ -61,8 +62,17 @@ export class Grid {
 
   @action public toggleGridLines = () => {
     this.showGridLines = !this.showGridLines;
+    if (this.showGridLines && !this.showGridGap) {
+      this.toggleGridGap();
+    }
 
     this.settings.backgroundColor = this.showGridLines ? '#394B59' : '';
+  };
+
+  @action public toggleGridGap = () => {
+    this.showGridGap = !this.showGridGap;
+
+    this.settings.gap = this.showGridGap ? '1px' : '0px';
   };
 
   @action private updateGrid() {
