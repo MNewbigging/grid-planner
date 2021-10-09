@@ -61,7 +61,6 @@ export class GridDetails extends React.Component<Props> {
 
         <FormGroup label={'Grid cell size'} labelFor={'cell-size'}>
           <NumericInput
-            width={50}
             id={'cell-size'}
             defaultValue={grid.cellSize}
             buttonPosition={'none'}
