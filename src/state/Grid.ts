@@ -9,6 +9,7 @@ export class Grid {
   public rows: number = 5;
   public columns: number = 5;
   public cellSize: number = 30;
+  @observable public showGridLines = true;
   @observable public cells: GridCell[] = [];
   @observable.ref public selectedCell?: GridCell;
   @observable public settings: CSSProperties = {
@@ -57,6 +58,12 @@ export class Grid {
 
     this.updateGrid();
   }
+
+  @action public toggleGridLines = () => {
+    this.showGridLines = !this.showGridLines;
+
+    this.settings.backgroundColor = this.showGridLines ? '#394B59' : '';
+  };
 
   @action private updateGrid() {
     this.settings.gridTemplateColumns = `repeat(${this.columns}, minmax(0, ${this.cellSize}px))`;

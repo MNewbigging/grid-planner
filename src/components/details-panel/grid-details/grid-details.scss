@@ -1,5 +1,5 @@
 .grid-details {
-  .dimensions-input {
+  .my-form-group {
     .bp3-form-content {
       padding-top: 5px;
       display: flex;
@@ -11,14 +11,16 @@
       display: flex;
       align-items: center;
       gap: 5px;
-
-      .bp3-input-group {
-        width: 50px;
-      }
     }
 
     .apply-button {
       width: 70px;
+    }
+  }
+
+  .bp3-numeric-input {
+    .bp3-input-group {
+      width: 50px;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Button, FormGroup, Icon, InputGroup, NumericInput } from '@blueprintjs/core';
+import { Button, FormGroup, Icon, InputGroup, NumericInput, Switch } from '@blueprintjs/core';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
@@ -30,7 +30,7 @@ export class GridDetails extends React.Component<Props> {
           />
         </FormGroup>
 
-        <FormGroup label={'Grid dimensions'} className={'dimensions-input'}>
+        <FormGroup label={'Grid dimensions'} className={'my-form-group'}>
           <div className={'input-group'}>
             Rows
             <NumericInput
@@ -61,10 +61,20 @@ export class GridDetails extends React.Component<Props> {
 
         <FormGroup label={'Grid cell size'} labelFor={'cell-size'}>
           <NumericInput
+            width={50}
             id={'cell-size'}
             defaultValue={grid.cellSize}
             buttonPosition={'none'}
             onBlur={(e: React.ChangeEvent<HTMLInputElement>) => grid.setCellSize(e.target.value)}
+          />
+        </FormGroup>
+
+        <FormGroup label={'Grid view'} className={'my-form-group'}>
+          <Switch
+            label={'Show grid lines'}
+            alignIndicator={'left'}
+            checked={grid.showGridLines}
+            onChange={grid.toggleGridLines}
           />
         </FormGroup>
       </div>
@@ -72,7 +82,14 @@ export class GridDetails extends React.Component<Props> {
   }
 
   @action private setRows = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { grid } = this.props;
     const rows = parseInt(e.target.value);
+
+    // Has the value changed?
+    if (rows === grid.rows) {
+      return;
+    }
+
     if (rows) {
       this.rows = rows;
     }
@@ -81,7 +98,14 @@ export class GridDetails extends React.Component<Props> {
   };
 
   @action private setColumns = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { grid } = this.props;
     const cols = parseInt(e.target.value);
+
+    // Has the value changed?
+    if (cols === grid.columns) {
+      return;
+    }
+
     if (cols) {
       this.columns = cols;
     }
