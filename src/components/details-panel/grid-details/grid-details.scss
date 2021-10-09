@@ -1,0 +1,24 @@
+.grid-details {
+  .dimensions-input {
+    .bp3-form-content {
+      padding-top: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .bp3-input-group {
+        width: 50px;
+      }
+    }
+
+    .apply-button {
+      width: 70px;
+    }
+  }
+}

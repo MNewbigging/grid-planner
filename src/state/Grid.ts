@@ -5,8 +5,8 @@ import { GridCell } from './GridCell';
 export class Grid {
   public id: string;
   @observable public name: string;
-  @observable public rows: number = 5;
-  @observable public columns: number = 5;
+  public rows: number = 5;
+  public columns: number = 5;
   @observable public cellSize: number = 30;
   // For rendering in order
   @observable public cells: GridCell[] = [];
@@ -17,7 +17,7 @@ export class Grid {
     this.id = id;
     this.name = name;
 
-    this.createCells();
+    this.createCells(this.rows, this.columns);
   }
 
   @action public setName(name: string) {
@@ -26,32 +26,19 @@ export class Grid {
     }
   }
 
-  @action public setRows(rows: string) {
-    const value = parseInt(rows, 10);
-    if (value) {
-      this.rows = value;
-    }
+  @action public async createCells(rows: number, columns: number) {
+    const tempCells: GridCell[] = [];
+    const tempCellsMap = new Map<string, GridCell>();
 
-    this.createCells();
-  }
-
-  @action public setColumns(columns: string) {
-    const value = parseInt(columns, 10);
-    if (value) {
-      this.columns = value;
-    }
-
-    this.createCells();
-  }
-
-  @action private createCells() {
-    this.cells = [];
-    this.cellsMap.clear();
-
-    for (let i = 0; i < this.columns * this.rows; i++) {
+    for (let i = 0; i < rows * columns; i++) {
       const cell = new GridCell(RandomUtils.createId(12));
-      this.cells.push(cell);
-      this.cellsMap.set(cell.id, cell);
+      tempCells.push(cell);
+      tempCellsMap.set(cell.id, cell);
     }
+
+    this.rows = rows;
+    this.columns = columns;
+    this.cells = tempCells;
+    this.cellsMap = tempCellsMap;
   }
 }
