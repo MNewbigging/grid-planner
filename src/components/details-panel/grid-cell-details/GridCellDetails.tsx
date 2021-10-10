@@ -5,7 +5,7 @@ import React from 'react';
 
 import { Color, ColorResult, SketchPicker } from 'react-color';
 import { GridCell } from '../../../state/GridCell';
-import { ColorPicker } from '../../common/color-picker/ColorPicker';
+import { ColorPicker } from '../../common/inputs/color-picker/ColorPicker';
 
 import './grid-cell-details.scss';
 

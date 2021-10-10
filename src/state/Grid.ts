@@ -37,13 +37,12 @@ export class Grid {
     this.selectedCell = cell;
   }
 
-  @action public setCellSize(size: string) {
-    const value = parseInt(size, 10);
-    if (value && value > 0) {
-      this.cellSize = value;
+  public setCellSize = (size: number) => {
+    if (size > 0) {
+      this.cellSize = size;
       this.updateGrid();
     }
-  }
+  };
 
   @action public async createCells(rows: number, columns: number) {
     const tempCells: GridCell[] = [];

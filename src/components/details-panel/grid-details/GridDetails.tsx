@@ -3,6 +3,7 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { Grid } from '../../../state/Grid';
+import { NumberInput, NumberInputSize } from '../../common/inputs/number-input/NumberInput';
 
 import './grid-details.scss';
 
@@ -14,8 +15,8 @@ interface Props {
 export class GridDetails extends React.Component<Props> {
   @observable private dimensionsApply = false;
   @observable private dimensionsApplyLoading = false;
-  private rows = 0;
-  private columns = 0;
+  private rows = this.props.grid.rows;
+  private columns = this.props.grid.columns;
 
   public render() {
     const { grid } = this.props;
@@ -31,25 +32,19 @@ export class GridDetails extends React.Component<Props> {
         </FormGroup>
 
         <FormGroup label={'Grid dimensions'} className={'my-form-group'}>
-          <div className={'input-group'}>
-            Rows
-            <NumericInput
-              id={'grid-rows'}
-              defaultValue={grid.rows}
-              onBlur={this.setRows}
-              buttonPosition={'none'}
-            />
-          </div>
-
-          <div className={'input-group'}>
-            Columns
-            <NumericInput
-              id={'grid-columns'}
-              defaultValue={grid.columns}
-              onBlur={this.setColumns}
-              buttonPosition={'none'}
-            />
-          </div>
+          <NumberInput
+            label={'Rows'}
+            defaultValue={grid.rows}
+            onBlur={this.setRows}
+            id={'grid-rows'}
+            size={NumberInputSize.MEDIUM}
+          />
+          <NumberInput
+            label={'Columns'}
+            defaultValue={grid.columns}
+            onBlur={this.setColumns}
+            size={NumberInputSize.MEDIUM}
+          />
           <Button
             className={'apply-button'}
             text={'Apply'}
@@ -60,11 +55,11 @@ export class GridDetails extends React.Component<Props> {
         </FormGroup>
 
         <FormGroup label={'Grid cell size'} labelFor={'cell-size'}>
-          <NumericInput
+          <NumberInput
             id={'cell-size'}
+            label={'Pixels'}
             defaultValue={grid.cellSize}
-            buttonPosition={'none'}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => grid.setCellSize(e.target.value)}
+            onBlur={grid.setCellSize}
           />
         </FormGroup>
 
@@ -86,9 +81,9 @@ export class GridDetails extends React.Component<Props> {
     );
   }
 
-  @action private setRows = (e: React.ChangeEvent<HTMLInputElement>) => {
+  @action private setRows = (rows: number) => {
     const { grid } = this.props;
-    const rows = parseInt(e.target.value);
+    // const rows = parseInt(e.target.value);
 
     // Has the value changed?
     if (rows === grid.rows) {
@@ -102,9 +97,8 @@ export class GridDetails extends React.Component<Props> {
     this.dimensionsApply = true;
   };
 
-  @action private setColumns = (e: React.ChangeEvent<HTMLInputElement>) => {
+  @action private setColumns = (cols: number) => {
     const { grid } = this.props;
-    const cols = parseInt(e.target.value);
 
     // Has the value changed?
     if (cols === grid.columns) {
