@@ -1,0 +1,16 @@
+.border-control-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+
+  .control-toggle {
+    width: fit-content;
+  }
+
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}

@@ -5,6 +5,7 @@ import React from 'react';
 import { GridCell } from '../../../state/GridCell';
 import { ColorPicker } from '../../common/inputs/color-picker/ColorPicker';
 import { NumberInput, NumberInputSize } from '../../common/inputs/number-input/NumberInput';
+import { BorderSettingsDetails } from './BorderSettingsDetails';
 
 import './grid-cell-details.scss';
 
@@ -27,39 +28,7 @@ export class GridCellDetails extends React.Component<Props> {
           />
         </FormGroup>
 
-        <FormGroup label={'Borders'}>{this.renderAllBordersSettings()}</FormGroup>
-      </div>
-    );
-  }
-
-  private renderAllBordersSettings() {
-    const { gridCell } = this.props;
-
-    return (
-      <div className={'border-control-line'}>
-        <Switch
-          alignIndicator={'right'}
-          label={'All'}
-          checked={gridCell.allBorders}
-          onChange={gridCell.toggleAllBorders}
-        />
-        <NumberInput
-          label={'Size'}
-          defaultValue={gridCell.allBorderSize}
-          onBlur={gridCell.setAllBorderSize}
-          size={NumberInputSize.SMALL}
-        />
-        <NumberInput
-          label={'Radius'}
-          defaultValue={gridCell.allBorderRadius}
-          onBlur={gridCell.setAllBorderRadius}
-          size={NumberInputSize.SMALL}
-        />
-        <ColorPicker
-          label={'Fill'}
-          color={gridCell.settings.borderColor}
-          setColor={gridCell.setAllBorderColor}
-        />
+        <BorderSettingsDetails borderSettings={gridCell.borderSettings} />
       </div>
     );
   }
