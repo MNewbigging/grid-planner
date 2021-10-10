@@ -7,16 +7,10 @@
   .border-control-line {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 12px;
 
-    .bp3-numeric-input {
-      .bp3-input-group {
-        width: 30px;
-      }
-    }
-
-    .label {
-      margin-bottom: 2px;
+    .bp3-control {
+      margin: 0;
     }
   }
 }

@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
-import { Color, ColorResult } from 'react-color';
+import { ColorResult } from 'react-color';
 
 export class GridCell {
   public id: string;
@@ -8,6 +8,7 @@ export class GridCell {
   @observable public allBorders = false;
   @observable public allBorderSize = 0;
   @observable public allBorderRadius = 0;
+  @observable public allBorderColor = '';
 
   constructor(id: string) {
     this.id = id;
@@ -23,24 +24,31 @@ export class GridCell {
 
   @action public toggleAllBorders = () => {
     this.allBorders = !this.allBorders;
+    this.updateAllBorders();
   };
 
-  @action public setAllBorderSize(size: string) {
-    const value = parseInt(size, 10);
-    if (value >= 0) {
-      this.allBorderSize = value;
+  @action public setAllBorderSize = (size: number) => {
+    if (size >= 0) {
+      this.allBorderSize = size;
     }
-  }
+  };
 
-  @action public setAllBorderRadius(radius: string) {
-    const value = parseInt(radius, 10);
-    if (value >= 0) {
-      this.allBorderRadius = value;
+  @action public setAllBorderRadius = (radius: number) => {
+    if (radius >= 0) {
+      this.allBorderRadius = radius;
     }
-  }
+  };
 
   @action public setAllBorderColor = (color: ColorResult) => {
     const rgba = color.rgb;
-    this.settings.borderColor = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+    this.allBorderColor = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
   };
+
+  @action private updateAllBorders() {
+    if (this.allBorders) {
+      this.settings.border = `${this.allBorderSize}px solid ${this.allBorderRadius}`;
+    } else {
+      this.settings.border = '';
+    }
+  }
 }

@@ -60,6 +60,7 @@ export class GridDetails extends React.Component<Props> {
             label={'Pixels'}
             defaultValue={grid.cellSize}
             onBlur={grid.setCellSize}
+            size={NumberInputSize.MEDIUM}
           />
         </FormGroup>
 
