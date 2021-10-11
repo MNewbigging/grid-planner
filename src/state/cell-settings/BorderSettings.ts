@@ -17,7 +17,7 @@ export class BorderSettings {
   @observable public active = false;
   @observable public size = 0;
   @observable public radius = 0;
-  @observable public color = '';
+  @observable public color = '#000000';
   @observable public type = BorderType.SOLID;
 
   constructor(private update: () => void) {}
@@ -62,5 +62,9 @@ export class BorderSettings {
 
   public setType = (type: BorderType) => {
     this.type = type;
+
+    if (this.active) {
+      this.update();
+    }
   };
 }

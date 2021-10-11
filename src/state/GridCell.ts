@@ -22,5 +22,15 @@ export class GridCell {
     this.settings.backgroundColor = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
   };
 
-  private updateAllBorders = () => {};
+  @action private updateAllBorders = () => {
+    const { active, size, radius, color, type } = this.allBorderSettings;
+
+    if (active) {
+      this.settings.border = `${size}px ${type} ${color}`;
+      this.settings.borderRadius = `${radius}px`;
+    } else {
+      this.settings.border = '';
+      this.settings.borderRadius = '';
+    }
+  };
 }
