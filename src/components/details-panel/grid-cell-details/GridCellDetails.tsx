@@ -28,7 +28,7 @@ export class GridCellDetails extends React.Component<Props> {
           />
         </FormGroup>
 
-        <BorderSettingsDetails borderSettings={gridCell.borderSettings} />
+        <BorderSettingsDetails borderSettings={gridCell.allBorderSettings} />
       </div>
     );
   }

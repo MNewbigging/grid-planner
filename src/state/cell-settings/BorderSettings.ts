@@ -12,51 +12,55 @@ export enum BorderType {
   INSET = 'inset',
   OUTSET = 'outset',
 }
-// TODO make all these observables
+
 export class BorderSettings {
-  public allBorders = false;
-  public allBordersSize = 0;
-  public allBordersRadius = 0;
-  @observable public allBordersColor = '';
-  public allBordersType = BorderType.SOLID;
+  @observable public active = false;
+  @observable public size = 0;
+  @observable public radius = 0;
+  @observable public color = '';
+  @observable public type = BorderType.SOLID;
 
-  constructor(private settings: CSSProperties) {}
+  constructor(private update: () => void) {}
 
-  public toggleAllBorders = () => {
-    this.allBorders = !this.allBorders;
-    this.updateAllBorders();
-  };
-
-  public setAllBordersSize = (size: number) => {
-    if (size >= 0) {
-      this.allBordersSize = size;
-    }
-
-    this.updateAllBorders();
-  };
-
-  public setAllBordersRadius = (radius: number) => {
-    if (radius >= 0) {
-      this.allBordersRadius = radius;
-    }
-
-    this.updateAllBorders();
-  };
-
-  public setAllBordersColor = (color: ColorResult) => {
-    const rgba = color.rgb;
-    this.allBordersColor = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
-
-    this.updateAllBorders();
-  };
-
-  private updateAllBorders() {
-    if (this.allBorders) {
-      this.settings.border = `${this.allBordersSize}px ${this.allBordersType} ${this.allBordersColor}`;
-      this.settings.borderRadius = `${this.allBordersRadius}px`;
-    } else {
-      this.settings.border = '';
-      this.settings.borderRadius = '';
-    }
+  public getTypeOptions() {
+    return Array.from(Object.values(BorderType));
   }
+
+  public toggleActive = () => {
+    this.active = !this.active;
+    this.update();
+  };
+
+  public setSize = (size: number) => {
+    if (size >= 0) {
+      this.size = size;
+    }
+
+    if (this.active) {
+      this.update();
+    }
+  };
+
+  public setRadius = (radius: number) => {
+    if (radius >= 0) {
+      this.radius = radius;
+    }
+
+    if (this.active) {
+      this.update();
+    }
+  };
+
+  public setColor = (color: ColorResult) => {
+    const rgba = color.rgb;
+    this.color = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+
+    if (this.active) {
+      this.update();
+    }
+  };
+
+  public setType = (type: BorderType) => {
+    this.type = type;
+  };
 }

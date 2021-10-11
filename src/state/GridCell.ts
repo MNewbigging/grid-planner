@@ -6,12 +6,12 @@ import { BorderSettings } from './cell-settings/BorderSettings';
 export class GridCell {
   public id: string;
   @observable public settings: CSSProperties = {};
-  @observable public borderSettings: BorderSettings;
+  @observable public allBorderSettings: BorderSettings;
 
   constructor(id: string) {
     this.id = id;
 
-    this.borderSettings = new BorderSettings(this.settings);
+    this.allBorderSettings = new BorderSettings(this.updateAllBorders);
 
     // Default background colour
     this.settings.backgroundColor = 'white';
@@ -21,12 +21,6 @@ export class GridCell {
     const rgba = color.rgb;
     this.settings.backgroundColor = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
   };
-}
 
-/**
- * TODO:
- *
- * Just make one BorderSettings class for each border setting; all, top, right, bot, left
- * Then I can make one component for each border setting and just pass them in, instead
- * of one massive input that duplicates the work
- */
+  private updateAllBorders = () => {};
+}
