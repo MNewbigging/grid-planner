@@ -1,3 +1,4 @@
+import { timeStamp } from 'console';
 import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
@@ -7,11 +8,13 @@ export class GridCell {
   public id: string;
   @observable public settings: CSSProperties = {};
   @observable public allBorderSettings: BorderSettings;
+  @observable public topBorderSettings: BorderSettings;
 
   constructor(id: string) {
     this.id = id;
 
     this.allBorderSettings = new BorderSettings(this.updateAllBorders);
+    this.topBorderSettings = new BorderSettings(this.updateTopBorder);
 
     // Default background colour
     this.settings.backgroundColor = 'white';
@@ -31,6 +34,22 @@ export class GridCell {
     } else {
       this.settings.border = '';
       this.settings.borderRadius = '';
+    }
+  };
+
+  @action private updateTopBorder = () => {
+    const { active, size, radius, color, type } = this.topBorderSettings;
+
+    if (active) {
+      this.settings.borderTop = `${size}px ${type} ${color}`;
+      this.settings.borderTopRightRadius = `${radius}px`;
+      this.settings.borderTopLeftRadius = `${radius}px`;
+    } else {
+      this.settings.borderTop = this.settings.border;
+      this.settings.borderTopRightRadius = this.settings.borderTopRightRadius;
+      this.settings.borderTopLeftRadius = this.settings.borderTopLeftRadius;
+
+      this.updateAllBorders();
     }
   };
 }
