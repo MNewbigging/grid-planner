@@ -37,6 +37,18 @@ export class GridCellDetails extends React.Component<Props> {
             borderSettings={gridCell.topBorderSettings}
             toggleLabel={'Top border'}
           />
+          <BorderSettingsDetails
+            borderSettings={gridCell.rightBorderSettings}
+            toggleLabel={'Right border'}
+          />
+          <BorderSettingsDetails
+            borderSettings={gridCell.botBorderSettings}
+            toggleLabel={'Bottom border'}
+          />
+          <BorderSettingsDetails
+            borderSettings={gridCell.leftBorderSettings}
+            toggleLabel={'Left border'}
+          />
         </FormGroup>
       </div>
     );
