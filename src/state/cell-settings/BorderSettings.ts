@@ -12,7 +12,7 @@ export enum BorderType {
   INSET = 'inset',
   OUTSET = 'outset',
 }
-
+// TODO make all these observables
 export class BorderSettings {
   public allBorders = false;
   public allBordersSize = 0;
