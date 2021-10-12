@@ -1,10 +1,12 @@
-import { FileInput, FormGroup } from '@blueprintjs/core';
+import { Button, ButtonGroup, FormGroup, Text, TextArea } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { TextAlign } from '../../../state/cell-settings/TextSettings';
 
 import { GridCell } from '../../../state/GridCell';
 import { ColorPicker } from '../../common/inputs/color-picker/ColorPicker';
 import { FilePicker } from '../../common/inputs/file-picker/FilePicker';
+import { TextAreaInput } from '../../common/inputs/textarea-input/TextAreaInput';
 import { BorderSettingsDetails } from './BorderSettingsDetails';
 
 import './grid-cell-details.scss';
@@ -57,6 +59,41 @@ export class GridCellDetails extends React.Component<Props> {
             borderSettings={gridCell.leftBorderSettings}
             toggleLabel={'Left border'}
           />
+        </FormGroup>
+
+        <FormGroup label={'Content'}>
+          <div className={'text-settings'}>
+            <TextAreaInput
+              label={'Text'}
+              text={gridCell.textSettings.text}
+              onChange={gridCell.textSettings.setText}
+            />
+            <div className={'text-layout-settings'}>
+              <Text>Text align</Text>
+              <ButtonGroup minimal>
+                <Button
+                  icon={'align-left'}
+                  outlined={gridCell.textSettings.isAlignSelected(TextAlign.LEFT)}
+                  onClick={() => gridCell.textSettings.setTextAlign(TextAlign.LEFT)}
+                />
+                <Button
+                  icon={'align-center'}
+                  outlined={gridCell.textSettings.isAlignSelected(TextAlign.CENTER)}
+                  onClick={() => gridCell.textSettings.setTextAlign(TextAlign.CENTER)}
+                />
+                <Button
+                  icon={'align-right'}
+                  outlined={gridCell.textSettings.isAlignSelected(TextAlign.RIGHT)}
+                  onClick={() => gridCell.textSettings.setTextAlign(TextAlign.RIGHT)}
+                />
+                <Button
+                  icon={'align-justify'}
+                  outlined={gridCell.textSettings.isAlignSelected(TextAlign.JUSTIFY)}
+                  onClick={() => gridCell.textSettings.setTextAlign(TextAlign.JUSTIFY)}
+                />
+              </ButtonGroup>
+            </div>
+          </div>
         </FormGroup>
       </div>
     );

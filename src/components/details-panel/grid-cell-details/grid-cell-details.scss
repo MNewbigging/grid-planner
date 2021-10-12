@@ -19,4 +19,16 @@
       }
     }
   }
+
+  .text-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .text-layout-settings {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
 }

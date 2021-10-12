@@ -1,3 +1,4 @@
+import { Text } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
@@ -20,7 +21,9 @@ export class GridCellDisplay extends React.Component<Props> {
         className={'grid-cell-display'}
         style={{ ...gridCell.settings }}
         onClick={() => onClick()}
-      ></div>
+      >
+        <Text>{gridCell.textSettings.text}</Text>
+      </div>
     );
   }
 }

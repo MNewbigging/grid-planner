@@ -2,6 +2,7 @@ import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
 import { BorderSettings } from './cell-settings/BorderSettings';
+import { TextSettings } from './cell-settings/TextSettings';
 
 export class GridCell {
   public id: string;
@@ -12,6 +13,7 @@ export class GridCell {
   @observable public botBorderSettings: BorderSettings;
   @observable public leftBorderSettings: BorderSettings;
   @observable public bgImageName = '';
+  @observable public textSettings: TextSettings;
 
   constructor(id: string) {
     this.id = id;
@@ -21,6 +23,8 @@ export class GridCell {
     this.rightBorderSettings = new BorderSettings(this.updateRightBorder);
     this.botBorderSettings = new BorderSettings(this.updateBotBorder);
     this.leftBorderSettings = new BorderSettings(this.updateLeftBorder);
+
+    this.textSettings = new TextSettings(this.settings);
 
     // Default background colour
     this.settings.backgroundColor = 'white';
