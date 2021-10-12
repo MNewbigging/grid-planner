@@ -1,10 +1,10 @@
-import { FormGroup, Switch } from '@blueprintjs/core';
+import { FileInput, FormGroup } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
 import { GridCell } from '../../../state/GridCell';
 import { ColorPicker } from '../../common/inputs/color-picker/ColorPicker';
-import { NumberInput, NumberInputSize } from '../../common/inputs/number-input/NumberInput';
+import { FilePicker } from '../../common/inputs/file-picker/FilePicker';
 import { BorderSettingsDetails } from './BorderSettingsDetails';
 
 import './grid-cell-details.scss';
@@ -21,11 +21,19 @@ export class GridCellDetails extends React.Component<Props> {
     return (
       <div className={'grid-cell-details'}>
         <FormGroup label={'Background'}>
-          <ColorPicker
-            label={'Fill'}
-            color={gridCell.settings.backgroundColor}
-            setColor={gridCell.setBackgroundColor}
-          />
+          <div className={'background-settings'}>
+            <ColorPicker
+              label={'Fill'}
+              color={gridCell.settings.backgroundColor}
+              setColor={gridCell.setBackgroundColor}
+            />
+            <FilePicker
+              label={'Image'}
+              fileName={gridCell.bgImageName}
+              onFile={gridCell.setBackgroundImage}
+              onRemoveFile={gridCell.removeBackgroundImage}
+            />
+          </div>
         </FormGroup>
 
         <FormGroup label={'Borders'}>

@@ -11,6 +11,7 @@ export class GridCell {
   @observable public rightBorderSettings: BorderSettings;
   @observable public botBorderSettings: BorderSettings;
   @observable public leftBorderSettings: BorderSettings;
+  @observable public bgImageName = '';
 
   constructor(id: string) {
     this.id = id;
@@ -28,6 +29,24 @@ export class GridCell {
   @action public setBackgroundColor = (color: ColorResult) => {
     const rgba = color.rgb;
     this.settings.backgroundColor = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+  };
+
+  @action public setBackgroundImage = (fileList: FileList) => {
+    // Only choose the first file
+    const file = fileList.item(0);
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      this.settings.backgroundImage = `url(${reader.result})`;
+      this.bgImageName = file.name;
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  @action public removeBackgroundImage = () => {
+    this.settings.backgroundImage = '';
+    this.bgImageName = '';
   };
 
   @action private updateAllBorders = () => {

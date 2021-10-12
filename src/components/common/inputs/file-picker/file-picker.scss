@@ -1,0 +1,22 @@
+.file-picker {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .label {
+    flex: 0 0;
+  }
+
+  .file-picker-input {
+    flex: 1 1 100%;
+    max-width: 200px;
+
+    input {
+      width: 200px;
+    }
+  }
+
+  .remove-button {
+    flex: 0 0;
+  }
+}

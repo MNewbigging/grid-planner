@@ -3,4 +3,20 @@
   flex-direction: column;
   flex-wrap: nowrap;
   gap: 20px;
+
+  .background-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .bg-image-picker {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .image-picker {
+        width: 200px;
+      }
+    }
+  }
 }
