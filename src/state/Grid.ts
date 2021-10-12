@@ -8,7 +8,7 @@ export class Grid {
   @observable public name: string;
   public rows: number = 5;
   public columns: number = 5;
-  public cellSize: number = 30;
+  public cellSize: number = 100;
   @observable public showGridLines = true;
   @observable public showGridGap = true;
   @observable public cells: GridCell[] = [];

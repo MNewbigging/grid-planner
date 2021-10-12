@@ -1,4 +1,3 @@
-import { timeStamp } from 'console';
 import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
@@ -34,19 +33,26 @@ export class GridCell {
   @action private updateAllBorders = () => {
     const { active, size, radius, color, type } = this.allBorderSettings;
 
-    if (active) {
-      this.settings.border = `${size}px ${type} ${color}`;
-      this.settings.borderRadius = `${radius}px`;
-    } else {
-      this.settings.border = '';
-      this.settings.borderRadius = '';
-    }
+    const borderShorthand = active ? `${size}px ${type} ${color}` : '';
+    const borderRadius = active ? `${radius}px` : '';
 
-    // Go an update all the other borders in case this overwrote any of them
-    this.updateTopBorder();
-    this.updateRightBorder();
-    this.updateBotBorder();
-    this.updateLeftBorder();
+    // Must check that the other borders aren't active; they take precedence
+    if (!this.topBorderSettings.active) {
+      this.settings.borderTop = borderShorthand;
+      this.settings.borderTopRightRadius = borderRadius;
+    }
+    if (!this.rightBorderSettings.active) {
+      this.settings.borderRight = borderShorthand;
+      this.settings.borderBottomRightRadius = borderRadius;
+    }
+    if (!this.botBorderSettings.active) {
+      this.settings.borderBottom = borderShorthand;
+      this.settings.borderBottomLeftRadius = borderRadius;
+    }
+    if (!this.leftBorderSettings.active) {
+      this.settings.borderLeft = borderShorthand;
+      this.settings.borderTopLeftRadius = borderRadius;
+    }
   };
 
   @action private updateTopBorder = () => {
@@ -55,11 +61,9 @@ export class GridCell {
     if (active) {
       this.settings.borderTop = `${size}px ${type} ${color}`;
       this.settings.borderTopRightRadius = `${radius}px`;
-      this.settings.borderTopLeftRadius = `${radius}px`;
     } else {
-      this.settings.borderTop = this.settings.border;
-      this.settings.borderTopLeftRadius = this.settings.borderRadius;
-      this.settings.borderTopRightRadius = this.settings.borderRadius;
+      // Revert to all border settings
+      this.updateAllBorders();
     }
   };
 
@@ -68,12 +72,9 @@ export class GridCell {
 
     if (active) {
       this.settings.borderRight = `${size}px ${type} ${color}`;
-      this.settings.borderTopRightRadius = `${radius}px`;
       this.settings.borderBottomRightRadius = `${radius}px`;
     } else {
-      this.settings.borderRight = this.settings.border;
-      this.settings.borderTopRightRadius = this.settings.borderRadius;
-      this.settings.borderBottomRightRadius = this.settings.borderRadius;
+      this.updateAllBorders();
     }
   };
 
@@ -82,12 +83,9 @@ export class GridCell {
 
     if (active) {
       this.settings.borderBottom = `${size}px ${type} ${color}`;
-      this.settings.borderBottomRightRadius = `${radius}px`;
       this.settings.borderBottomLeftRadius = `${radius}px`;
     } else {
-      this.settings.borderBottom = this.settings.border;
-      this.settings.borderBottomRightRadius = this.settings.borderRadius;
-      this.settings.borderBottomLeftRadius = this.settings.borderRadius;
+      this.updateAllBorders();
     }
   };
 
@@ -96,12 +94,9 @@ export class GridCell {
 
     if (active) {
       this.settings.borderLeft = `${size}px ${type} ${color}`;
-      this.settings.borderBottomLeftRadius = `${radius}px`;
       this.settings.borderTopLeftRadius = `${radius}px`;
     } else {
-      this.settings.borderLeft = this.settings.border;
-      this.settings.borderBottomLeftRadius = this.settings.borderRadius;
-      this.settings.borderTopLeftRadius = this.settings.borderRadius;
+      this.updateAllBorders();
     }
   };
 }
