@@ -14,6 +14,7 @@ export class GridCell {
   @observable public leftBorderSettings: BorderSettings;
   @observable public bgImageName = '';
   @observable public textSettings: TextSettings;
+  @observable public templateId = '';
 
   constructor(id: string) {
     this.id = id;

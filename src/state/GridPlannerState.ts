@@ -1,17 +1,21 @@
 import { action, observable } from 'mobx';
 
 import { RandomUtils } from '../utils/RandomUtils';
+import { CellTemplate } from './CellTemplate';
+import { GridCell } from './GridCell';
 import { GridPlan } from './GridPlan';
 
 export enum DetailsPanelFocus {
   GRID_PLAN = 'grid-plan',
   GRID = 'grid',
   GRID_CELL = 'grid-cell',
+  TEMPLATES = 'templates',
 }
 
 export class GridPlannerState {
   @observable public detailsPanelFocus = DetailsPanelFocus.GRID_PLAN;
   @observable.ref public gridPlan?: GridPlan;
+  @observable public cellTemplates: CellTemplate[] = [];
 
   @action public setFocus(focus: DetailsPanelFocus) {
     this.detailsPanelFocus = focus;
@@ -24,5 +28,9 @@ export class GridPlannerState {
     // Select it, focus on it
     this.gridPlan = gridPlan;
     this.detailsPanelFocus = DetailsPanelFocus.GRID_PLAN;
+  }
+
+  @action public createTemplate(cell: GridCell) {
+    //
   }
 }

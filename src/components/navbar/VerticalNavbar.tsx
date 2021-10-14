@@ -50,7 +50,13 @@ export class VerticalNavbar extends React.Component<Props> {
         </div>
 
         <div className={'section'}>
-          <Button icon={'duplicate'} minimal large />
+          <Button
+            icon={'duplicate'}
+            minimal
+            large
+            onClick={() => plannerState.setFocus(DetailsPanelFocus.TEMPLATES)}
+            outlined={focus === DetailsPanelFocus.TEMPLATES}
+          />
         </div>
       </div>
     );

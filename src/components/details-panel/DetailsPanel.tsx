@@ -6,9 +6,11 @@ import { DetailsPanelFocus, GridPlannerState } from '../../state/GridPlannerStat
 import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
 import { DetailsPanelHeading, DetailsPanelHeadingProps } from '../common/DetailsPanelHeading';
 import { GridDetails } from './grid-details/GridDetails';
+import { GridCellDetails } from './grid-cell-details/GridCellDetails';
+import { CellTemplates } from './cell-templates/CellTemplates';
+import { GridCellActionRail } from './grid-cell-details/GricCellActionRail';
 
 import './details-panel.scss';
-import { GridCellDetails } from './grid-cell-details/GridCellDetails';
 
 interface Props {
   plannerState: GridPlannerState;
@@ -47,9 +49,21 @@ export class DetailsPanel extends React.Component<Props> {
         const grid = plannerState.gridPlan.selectedGrid;
         if (grid.selectedCell) {
           panelContent = <GridCellDetails gridCell={grid.selectedCell} />;
-          headingProps = { text: `${grid.name} cell`, icon: 'new-grid-item' };
+          headingProps = {
+            text: `${grid.name} cell`,
+            icon: 'new-grid-item',
+            actionRail: (
+              <GridCellActionRail
+                createTemplate={() => plannerState.createTemplate(grid.selectedCell)}
+              />
+            ),
+          };
         }
         break;
+      }
+      case DetailsPanelFocus.TEMPLATES: {
+        panelContent = <CellTemplates templates={plannerState.cellTemplates} />;
+        headingProps = { text: 'Cell templates', icon: 'duplicate' };
       }
     }
 
