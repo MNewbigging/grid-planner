@@ -19,30 +19,39 @@ export class VerticalNavbar extends React.Component<Props> {
 
     return (
       <div className={'vertical-navbar'}>
-        <Button
-          icon={'layers'}
-          minimal
-          onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_PLAN)}
-          outlined={focus === DetailsPanelFocus.GRID_PLAN}
-        />
-
-        {plannerState.gridPlan?.selectedGrid && (
+        <div className={'section'}>
           <Button
-            icon={'grid-view'}
+            icon={'layers'}
             minimal
-            onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID)}
-            outlined={focus === DetailsPanelFocus.GRID}
+            large
+            onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_PLAN)}
+            outlined={focus === DetailsPanelFocus.GRID_PLAN}
           />
-        )}
 
-        {plannerState.gridPlan?.selectedGrid?.selectedCell && (
-          <Button
-            icon={'new-grid-item'}
-            minimal
-            onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_CELL)}
-            outlined={focus === DetailsPanelFocus.GRID_CELL}
-          />
-        )}
+          {plannerState.gridPlan?.selectedGrid && (
+            <Button
+              icon={'grid-view'}
+              minimal
+              large
+              onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID)}
+              outlined={focus === DetailsPanelFocus.GRID}
+            />
+          )}
+
+          {plannerState.gridPlan?.selectedGrid?.selectedCell && (
+            <Button
+              icon={'new-grid-item'}
+              minimal
+              large
+              onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID_CELL)}
+              outlined={focus === DetailsPanelFocus.GRID_CELL}
+            />
+          )}
+        </div>
+
+        <div className={'section'}>
+          <Button icon={'duplicate'} minimal large />
+        </div>
       </div>
     );
   }
