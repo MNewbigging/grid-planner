@@ -22,6 +22,7 @@ export class TextSettings {
   @observable public italic = false;
   @observable public decoration = TextDecoration.NONE;
   @observable public color = '#182026';
+  @observable public size = 14;
 
   constructor(private settings: CSSProperties) {}
 
@@ -84,10 +85,18 @@ export class TextSettings {
     this.settings.textDecoration = this.decoration;
   }
 
-  @action setColor = (color: ColorResult) => {
+  @action public setColor = (color: ColorResult) => {
     const rgba = color.rgb;
     this.color = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
 
     this.settings.color = this.color;
+  };
+
+  @action public setSize = (size: number) => {
+    if (size > 0) {
+      this.size = size;
+
+      this.settings.fontSize = `${this.size}px`;
+    }
   };
 }

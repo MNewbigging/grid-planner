@@ -6,6 +6,7 @@ import { TextAlign, TextDecoration } from '../../../state/cell-settings/TextSett
 import { GridCell } from '../../../state/GridCell';
 import { ColorPicker } from '../../common/inputs/color-picker/ColorPicker';
 import { FilePicker } from '../../common/inputs/file-picker/FilePicker';
+import { NumberInput, NumberInputSize } from '../../common/inputs/number-input/NumberInput';
 import { TextAreaInput } from '../../common/inputs/textarea-input/TextAreaInput';
 import { BorderSettingsDetails } from './BorderSettingsDetails';
 
@@ -140,6 +141,12 @@ export class GridCellDetails extends React.Component<Props> {
                 label={'Text colour'}
                 color={gridCell.textSettings.color}
                 setColor={gridCell.textSettings.setColor}
+              />
+              <NumberInput
+                label={'Size'}
+                defaultValue={gridCell.textSettings.size}
+                onBlur={gridCell.textSettings.setSize}
+                size={NumberInputSize.SMALL}
               />
             </div>
           </div>
