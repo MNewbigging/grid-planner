@@ -144,8 +144,8 @@ export class GridCellDetails extends React.Component<Props> {
               />
               <NumberInput
                 label={'Size'}
-                defaultValue={gridCell.textSettings.size}
-                onBlur={gridCell.textSettings.setSize}
+                value={gridCell.textSettings.size}
+                onChange={gridCell.textSettings.setSize}
                 size={NumberInputSize.SMALL}
               />
             </div>

@@ -36,14 +36,14 @@ export class BorderSettingsDetails extends React.Component<Props> {
           <div className={'input-row'}>
             <NumberInput
               label={'Size'}
-              defaultValue={borderSettings.size}
-              onBlur={borderSettings.setSize}
+              value={borderSettings.size}
+              onChange={borderSettings.setSize}
               size={NumberInputSize.SMALL}
             />
             <NumberInput
               label={'Radius'}
-              defaultValue={borderSettings.radius}
-              onBlur={borderSettings.setRadius}
+              value={borderSettings.radius}
+              onChange={borderSettings.setRadius}
               size={NumberInputSize.SMALL}
             />
           </div>

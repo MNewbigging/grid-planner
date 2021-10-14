@@ -15,8 +15,8 @@ interface Props {
 export class GridDetails extends React.Component<Props> {
   @observable private dimensionsApply = false;
   @observable private dimensionsApplyLoading = false;
-  private rows = this.props.grid.rows;
-  private columns = this.props.grid.columns;
+  @observable private rows = this.props.grid.rows;
+  @observable private columns = this.props.grid.columns;
 
   public render() {
     const { grid } = this.props;
@@ -34,15 +34,15 @@ export class GridDetails extends React.Component<Props> {
         <FormGroup label={'Grid dimensions'} className={'my-form-group'}>
           <NumberInput
             label={'Rows'}
-            defaultValue={grid.rows}
-            onBlur={this.setRows}
+            value={this.rows}
+            onChange={this.setRows}
             id={'grid-rows'}
             size={NumberInputSize.MEDIUM}
           />
           <NumberInput
             label={'Columns'}
-            defaultValue={grid.columns}
-            onBlur={this.setColumns}
+            value={this.columns}
+            onChange={this.setColumns}
             size={NumberInputSize.MEDIUM}
           />
           <Button
@@ -58,8 +58,8 @@ export class GridDetails extends React.Component<Props> {
           <NumberInput
             id={'cell-size'}
             label={'Pixels'}
-            defaultValue={grid.cellSize}
-            onBlur={grid.setCellSize}
+            value={grid.cellSize}
+            onChange={grid.setCellSize}
             size={NumberInputSize.MEDIUM}
           />
         </FormGroup>

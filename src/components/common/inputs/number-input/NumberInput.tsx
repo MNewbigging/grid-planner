@@ -12,8 +12,8 @@ export enum NumberInputSize {
 
 interface Props {
   label: string;
-  defaultValue: number;
-  onBlur: (value: number) => void;
+  value: number;
+  onChange: (value: number) => void;
   id?: string;
   size?: NumberInputSize;
 }
@@ -21,7 +21,7 @@ interface Props {
 @observer
 export class NumberInput extends React.Component<Props> {
   public render() {
-    const { label, defaultValue, onBlur, id, size } = this.props;
+    const { label, value, onChange, id, size } = this.props;
 
     const inputSize = size ?? NumberInputSize.FILL;
 
@@ -31,8 +31,8 @@ export class NumberInput extends React.Component<Props> {
         <NumericInput
           id={id}
           buttonPosition={'none'}
-          defaultValue={defaultValue}
-          onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onBlur(parseInt(e.target.value, 10))}
+          value={value}
+          onValueChange={(val: number) => onChange(val)}
         />
       </div>
     );
