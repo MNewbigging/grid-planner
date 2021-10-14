@@ -69,27 +69,42 @@ export class GridCellDetails extends React.Component<Props> {
               onChange={gridCell.textSettings.setText}
             />
             <div className={'text-layout-settings'}>
-              <Text>Text align</Text>
+              <Text>Text horizontal align</Text>
               <ButtonGroup minimal>
                 <Button
-                  icon={'align-left'}
-                  outlined={gridCell.textSettings.isAlignSelected(TextAlign.LEFT)}
-                  onClick={() => gridCell.textSettings.setTextAlign(TextAlign.LEFT)}
+                  icon={'alignment-left'}
+                  outlined={gridCell.textSettings.isXAlignSelected(TextAlign.START)}
+                  onClick={() => gridCell.textSettings.setTextAlignX(TextAlign.START)}
                 />
                 <Button
-                  icon={'align-center'}
-                  outlined={gridCell.textSettings.isAlignSelected(TextAlign.CENTER)}
-                  onClick={() => gridCell.textSettings.setTextAlign(TextAlign.CENTER)}
+                  icon={'alignment-horizontal-center'}
+                  outlined={gridCell.textSettings.isXAlignSelected(TextAlign.CENTER)}
+                  onClick={() => gridCell.textSettings.setTextAlignX(TextAlign.CENTER)}
                 />
                 <Button
-                  icon={'align-right'}
-                  outlined={gridCell.textSettings.isAlignSelected(TextAlign.RIGHT)}
-                  onClick={() => gridCell.textSettings.setTextAlign(TextAlign.RIGHT)}
+                  icon={'alignment-right'}
+                  outlined={gridCell.textSettings.isXAlignSelected(TextAlign.END)}
+                  onClick={() => gridCell.textSettings.setTextAlignX(TextAlign.END)}
+                />
+              </ButtonGroup>
+            </div>
+            <div className={'text-layout-settings'}>
+              <Text>Text vertical align</Text>
+              <ButtonGroup minimal>
+                <Button
+                  icon={'alignment-top'}
+                  outlined={gridCell.textSettings.isYAlignSelected(TextAlign.START)}
+                  onClick={() => gridCell.textSettings.setTextAlignY(TextAlign.START)}
                 />
                 <Button
-                  icon={'align-justify'}
-                  outlined={gridCell.textSettings.isAlignSelected(TextAlign.JUSTIFY)}
-                  onClick={() => gridCell.textSettings.setTextAlign(TextAlign.JUSTIFY)}
+                  icon={'alignment-vertical-center'}
+                  outlined={gridCell.textSettings.isYAlignSelected(TextAlign.CENTER)}
+                  onClick={() => gridCell.textSettings.setTextAlignY(TextAlign.CENTER)}
+                />
+                <Button
+                  icon={'alignment-bottom'}
+                  outlined={gridCell.textSettings.isYAlignSelected(TextAlign.END)}
+                  onClick={() => gridCell.textSettings.setTextAlignY(TextAlign.END)}
                 />
               </ButtonGroup>
             </div>

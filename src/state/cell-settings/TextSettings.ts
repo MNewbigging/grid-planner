@@ -2,33 +2,39 @@ import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 
 export enum TextAlign {
-  LEFT = 'left',
+  START = 'start',
   CENTER = 'center',
-  RIGHT = 'right',
-  JUSTIFY = 'justify',
+  END = 'end',
 }
 
 export class TextSettings {
   @observable public text = '';
-  @observable public textAlign = TextAlign.LEFT;
+  @observable public xAlign = TextAlign.START;
+  @observable public yAlign = TextAlign.START;
 
   constructor(private settings: CSSProperties) {}
 
-  public isAlignSelected(textAlign: TextAlign) {
-    return textAlign === this.textAlign;
+  public isXAlignSelected(textAlign: TextAlign) {
+    return textAlign === this.xAlign;
+  }
+
+  public isYAlignSelected(textAlign: TextAlign) {
+    return textAlign === this.yAlign;
   }
 
   @action public setText = (text: string) => {
     this.text = text;
   };
 
-  @action public setTextAlign(textAlign: TextAlign) {
-    this.textAlign = textAlign;
+  @action public setTextAlignX(textAlign: TextAlign) {
+    this.xAlign = textAlign;
 
-    this.updateSettings();
+    this.settings.justifyContent = this.xAlign;
   }
 
-  @action private updateSettings() {
-    this.settings.textAlign = this.textAlign;
+  @action public setTextAlignY(textAlign: TextAlign) {
+    this.yAlign = textAlign;
+
+    this.settings.alignItems = this.yAlign;
   }
 }
