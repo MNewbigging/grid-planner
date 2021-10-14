@@ -7,10 +7,19 @@ export enum TextAlign {
   END = 'end',
 }
 
+export enum TextDecoration {
+  NONE = 'none',
+  UNDERLINE = 'underline',
+  STRIKETHROUGH = 'line-through',
+}
+
 export class TextSettings {
   @observable public text = '';
   @observable public xAlign = TextAlign.START;
   @observable public yAlign = TextAlign.START;
+  @observable public bold = false;
+  @observable public italic = false;
+  @observable public decoration = TextDecoration.NONE;
 
   constructor(private settings: CSSProperties) {}
 
@@ -20,6 +29,10 @@ export class TextSettings {
 
   public isYAlignSelected(textAlign: TextAlign) {
     return textAlign === this.yAlign;
+  }
+
+  public isDecorationSelected(textDecoration: TextDecoration) {
+    return textDecoration === this.decoration;
   }
 
   @action public setText = (text: string) => {
@@ -36,5 +49,36 @@ export class TextSettings {
     this.yAlign = textAlign;
 
     this.settings.alignItems = this.yAlign;
+  }
+
+  @action public toggleBold = () => {
+    this.bold = !this.bold;
+
+    if (this.bold) {
+      this.settings.fontWeight = 'bold';
+    } else {
+      this.settings.fontWeight = 'normal';
+    }
+  };
+
+  @action public toggleItalic = () => {
+    this.italic = !this.italic;
+
+    if (this.italic) {
+      this.settings.fontStyle = 'italic';
+    } else {
+      this.settings.fontStyle = 'normal';
+    }
+  };
+
+  @action public setDecoration(decoration: TextDecoration) {
+    // Buttons toggle, but several values for decoration
+    if (this.decoration === decoration) {
+      this.decoration = TextDecoration.NONE;
+    } else {
+      this.decoration = decoration;
+    }
+
+    this.settings.textDecoration = this.decoration;
   }
 }

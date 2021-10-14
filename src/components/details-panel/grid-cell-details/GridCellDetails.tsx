@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, FormGroup, Text, TextArea } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { TextAlign } from '../../../state/cell-settings/TextSettings';
+import { TextAlign, TextDecoration } from '../../../state/cell-settings/TextSettings';
 
 import { GridCell } from '../../../state/GridCell';
 import { ColorPicker } from '../../common/inputs/color-picker/ColorPicker';
@@ -68,7 +68,7 @@ export class GridCellDetails extends React.Component<Props> {
               text={gridCell.textSettings.text}
               onChange={gridCell.textSettings.setText}
             />
-            <div className={'text-layout-settings'}>
+            <div className={'text-settings-row'}>
               <Text>Text horizontal align</Text>
               <ButtonGroup minimal>
                 <Button
@@ -88,7 +88,7 @@ export class GridCellDetails extends React.Component<Props> {
                 />
               </ButtonGroup>
             </div>
-            <div className={'text-layout-settings'}>
+            <div className={'text-settings-row'}>
               <Text>Text vertical align</Text>
               <ButtonGroup minimal>
                 <Button
@@ -105,6 +105,33 @@ export class GridCellDetails extends React.Component<Props> {
                   icon={'alignment-bottom'}
                   outlined={gridCell.textSettings.isYAlignSelected(TextAlign.END)}
                   onClick={() => gridCell.textSettings.setTextAlignY(TextAlign.END)}
+                />
+              </ButtonGroup>
+            </div>
+            <div className={'text-settings-row'}>
+              <Text>Text style</Text>
+              <ButtonGroup minimal>
+                <Button
+                  icon={'bold'}
+                  outlined={gridCell.textSettings.bold}
+                  onClick={gridCell.textSettings.toggleBold}
+                />
+                <Button
+                  icon={'italic'}
+                  outlined={gridCell.textSettings.italic}
+                  onClick={gridCell.textSettings.toggleItalic}
+                />
+                <Button
+                  icon={'underline'}
+                  outlined={gridCell.textSettings.isDecorationSelected(TextDecoration.UNDERLINE)}
+                  onClick={() => gridCell.textSettings.setDecoration(TextDecoration.UNDERLINE)}
+                />
+                <Button
+                  icon={'strikethrough'}
+                  outlined={gridCell.textSettings.isDecorationSelected(
+                    TextDecoration.STRIKETHROUGH
+                  )}
+                  onClick={() => gridCell.textSettings.setDecoration(TextDecoration.STRIKETHROUGH)}
                 />
               </ButtonGroup>
             </div>
