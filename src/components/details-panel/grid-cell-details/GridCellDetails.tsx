@@ -135,6 +135,13 @@ export class GridCellDetails extends React.Component<Props> {
                 />
               </ButtonGroup>
             </div>
+            <div className={'text-settings-row'}>
+              <ColorPicker
+                label={'Text colour'}
+                color={gridCell.textSettings.color}
+                setColor={gridCell.textSettings.setColor}
+              />
+            </div>
           </div>
         </FormGroup>
       </div>
