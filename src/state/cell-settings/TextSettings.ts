@@ -30,14 +30,14 @@ export class TextSettings {
     this.settings = settings;
 
     // Apply default settings
-    this.initDefaultValues();
+    this.setDefaultValues();
   }
 
   public updateSettings(settings: CSSProperties, text: string) {
     this.settings = settings;
     this.text = text;
 
-    this.initValuesFromSettings(settings);
+    this.fromSettings(settings);
   }
 
   public isXAlignSelected(textAlign: TextAlign) {
@@ -115,7 +115,7 @@ export class TextSettings {
     this.settings.fontSize = `${this.size}px`;
   };
 
-  @action public initDefaultValues() {
+  @action public setDefaultValues() {
     this.setText('');
     this.setTextAlignX(TextAlign.START);
     this.setTextAlignY(TextAlign.START);
@@ -132,7 +132,7 @@ export class TextSettings {
     this.settings.fontStyle = 'normal';
   }
 
-  private initValuesFromSettings(settings: CSSProperties) {
+  private fromSettings(settings: CSSProperties) {
     // Set values from settings
     this.xAlign = EnumUtils.getEnumKey(TextAlign, settings.justifyContent);
     this.yAlign = EnumUtils.getEnumKey(TextAlign, settings.alignItems);

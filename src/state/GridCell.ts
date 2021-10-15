@@ -42,7 +42,12 @@ export class GridCell {
   }
 
   @action public reset() {
-    this.textSettings.initDefaultValues();
+    this.textSettings.setDefaultValues();
+    this.allBorderSettings.setDefaultValues();
+    this.topBorderSettings.setDefaultValues();
+    this.rightBorderSettings.setDefaultValues();
+    this.botBorderSettings.setDefaultValues();
+    this.leftBorderSettings.setDefaultValues();
   }
 
   @action public setBackgroundColor = (color: ColorResult) => {
