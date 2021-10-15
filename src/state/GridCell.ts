@@ -20,16 +20,12 @@ export class GridCell {
   constructor(id: string) {
     this.id = id;
 
-    this.allBorderSettings = new BorderSettings(this.updateAllBorders);
-    this.topBorderSettings = new BorderSettings(this.updateTopBorder);
-    this.rightBorderSettings = new BorderSettings(this.updateRightBorder);
-    this.botBorderSettings = new BorderSettings(this.updateBotBorder);
-    this.leftBorderSettings = new BorderSettings(this.updateLeftBorder);
+    this.createBorderSettings();
 
     this.textSettings = new TextSettings(this.settings);
 
     // Default background colour
-    this.settings.backgroundColor = 'white';
+    this.settings.backgroundColor = '#FFFFFF';
   }
 
   @action public applyTemplate(template: CellTemplate) {
@@ -38,6 +34,11 @@ export class GridCell {
 
     // Update settings classes with new values
     this.textSettings = new TextSettings(this.settings).fromTemplate(template);
+    this.allBorderSettings.applyProps(template.allBorderProps);
+    this.topBorderSettings.applyProps(template.topBorderProps);
+    this.rightBorderSettings.applyProps(template.rightBorderProps);
+    this.botBorderSettings.applyProps(template.botBorderProps);
+    this.leftBorderSettings.applyProps(template.leftBorderProps);
   }
 
   @action public setBackgroundColor = (color: ColorResult) => {
@@ -62,6 +63,14 @@ export class GridCell {
     this.settings.backgroundImage = '';
     this.bgImageName = '';
   };
+
+  private createBorderSettings() {
+    this.allBorderSettings = new BorderSettings(this.updateAllBorders);
+    this.topBorderSettings = new BorderSettings(this.updateTopBorder);
+    this.rightBorderSettings = new BorderSettings(this.updateRightBorder);
+    this.botBorderSettings = new BorderSettings(this.updateBotBorder);
+    this.leftBorderSettings = new BorderSettings(this.updateLeftBorder);
+  }
 
   @action private updateAllBorders = () => {
     const { active, size, radius, color, type } = this.allBorderSettings;

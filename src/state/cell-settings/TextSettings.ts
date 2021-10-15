@@ -32,14 +32,7 @@ export class TextSettings {
     this.text = template.text;
 
     // Set values from settings
-    const settings = template.settings;
-    this.xAlign = EnumUtils.getEnumKey(TextAlign, settings.justifyContent);
-    this.yAlign = EnumUtils.getEnumKey(TextAlign, settings.alignItems);
-    this.bold = settings.fontWeight === 'bold';
-    this.italic = settings.fontStyle === 'italic';
-    this.decoration = EnumUtils.getEnumKey(TextDecoration, settings.textDecoration as string);
-    this.color = settings.color;
-    this.size = settings.fontSize as number;
+    this.initValues(template.settings);
 
     return this;
   }
@@ -117,4 +110,15 @@ export class TextSettings {
       this.settings.fontSize = `${this.size}px`;
     }
   };
+
+  private initValues(settings: CSSProperties) {
+    // Set values from settings
+    this.xAlign = EnumUtils.getEnumKey(TextAlign, settings.justifyContent);
+    this.yAlign = EnumUtils.getEnumKey(TextAlign, settings.alignItems);
+    this.bold = settings.fontWeight === 'bold';
+    this.italic = settings.fontStyle === 'italic';
+    this.decoration = EnumUtils.getEnumKey(TextDecoration, settings.textDecoration as string);
+    this.color = settings.color;
+    this.size = settings.fontSize as number;
+  }
 }

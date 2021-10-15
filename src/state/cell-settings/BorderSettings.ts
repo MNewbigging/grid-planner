@@ -1,5 +1,4 @@
 import { observable } from 'mobx';
-import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
 
 export enum BorderType {
@@ -13,6 +12,14 @@ export enum BorderType {
   OUTSET = 'outset',
 }
 
+export interface BorderSettingsProps {
+  active: boolean;
+  size: number;
+  radius: number;
+  color: string;
+  type: BorderType;
+}
+
 export class BorderSettings {
   @observable public active = false;
   @observable public size = 0;
@@ -21,6 +28,26 @@ export class BorderSettings {
   @observable public type = BorderType.SOLID;
 
   constructor(private update: () => void) {}
+
+  public applyProps(props: BorderSettingsProps) {
+    this.active = props.active;
+    this.size = props.size;
+    this.radius = props.radius;
+    this.color = props.color;
+    this.type = props.type;
+
+    return this;
+  }
+
+  public toProps(): BorderSettingsProps {
+    return {
+      active: this.active,
+      size: this.size,
+      radius: this.radius,
+      color: this.color,
+      type: this.type,
+    };
+  }
 
   public getTypeOptions() {
     return Array.from(Object.values(BorderType));
