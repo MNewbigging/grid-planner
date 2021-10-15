@@ -73,7 +73,6 @@ export class GridPlannerState {
   }
 
   public isPainting() {
-    console.log('isPainting');
     return this.paintingTemplate !== undefined;
   }
 

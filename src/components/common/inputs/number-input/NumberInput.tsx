@@ -34,7 +34,11 @@ export class NumberInput extends React.Component<Props> {
           buttonPosition={'none'}
           value={value}
           onValueChange={(val: number) => onChange(val)}
-          onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onBlur(parseInt(e.target.value, 10))}
+          onBlur={
+            onBlur
+              ? (e: React.ChangeEvent<HTMLInputElement>) => onBlur(parseInt(e.target.value, 10))
+              : undefined
+          }
         />
       </div>
     );
