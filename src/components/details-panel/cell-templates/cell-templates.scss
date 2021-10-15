@@ -11,7 +11,7 @@
     align-items: center;
     gap: 10px;
 
-    .template-display {
+    .template-preview-small {
       width: 40px;
       height: 40px;
 
@@ -20,6 +20,18 @@
       background-size: cover;
 
       display: flex;
+    }
+
+    .template-name {
+      flex: 1 1;
+    }
+
+    .template-actions {
+      flex: 0 0;
+
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
   }
 }

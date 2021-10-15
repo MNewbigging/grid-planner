@@ -40,13 +40,21 @@ export class CellTemplates extends React.Component<Props> {
   private renderTemplateRow(template: CellTemplate) {
     return (
       <div className={'template-row'}>
-        <Text>{template.name}</Text>
-        <div className={'template-display'} style={{ ...template.settings }}>
-          <Text ellipsize>{template.text}</Text>
-        </div>
         <Popover2 content={this.renderTemplatePreview(template)} placement={Position.RIGHT}>
-          <Button icon={'zoom-in'} minimal outlined />
+          <div className={'template-preview-small'} style={{ ...template.settings }}>
+            <Text ellipsize>{template.text}</Text>
+          </div>
         </Popover2>
+
+        <Text className={'template-name'} ellipsize>
+          {template.name}
+        </Text>
+
+        <div className={'template-actions'}>
+          <Button icon={'style'} minimal outlined />
+          <Button icon={'edit'} minimal outlined />
+          <Button icon={'trash'} minimal outlined />
+        </div>
       </div>
     );
   }
