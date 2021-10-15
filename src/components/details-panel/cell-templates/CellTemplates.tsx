@@ -1,4 +1,5 @@
-import { NonIdealState, Text } from '@blueprintjs/core';
+import { FormGroup, NonIdealState, Text } from '@blueprintjs/core';
+import { observer } from 'mobx-react';
 import React from 'react';
 
 import { CellTemplate } from '../../../state/CellTemplate';
@@ -9,6 +10,7 @@ interface Props {
   templates: CellTemplate[];
 }
 
+@observer
 export class CellTemplates extends React.Component<Props> {
   public render() {
     const { templates } = this.props;
@@ -38,7 +40,9 @@ export class CellTemplates extends React.Component<Props> {
     return (
       <div className={'template-row'}>
         <Text>{template.name}</Text>
-        <div className={'template-display'} style={{ ...template.settings }}></div>
+        <div className={'template-display'} style={{ ...template.settings }}>
+          <Text ellipsize>{template.text}</Text>
+        </div>
       </div>
     );
   }

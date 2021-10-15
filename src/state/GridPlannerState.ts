@@ -33,7 +33,7 @@ export class GridPlannerState {
 
   @action public createTemplate(cell: GridCell) {
     const templateName = `Template ${this.cellTemplates.length}`;
-    const template = new CellTemplate(templateName, cell.settings, cell.id);
+    const template = new CellTemplate(templateName, cell);
     this.cellTemplates.push(template);
 
     toastManager.okToast('Created cell template');

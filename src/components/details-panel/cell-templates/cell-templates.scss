@@ -12,8 +12,14 @@
     gap: 10px;
 
     .template-display {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
+
+      cursor: pointer;
+      background-position: center;
+      background-size: cover;
+
+      display: flex;
     }
   }
 }

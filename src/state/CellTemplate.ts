@@ -4,13 +4,15 @@ import { GridCell } from './GridCell';
 
 export class CellTemplate {
   @observable public name: string;
-  @observable public settings: CSSProperties;
   @observable public linkedCells: string[] = [];
+  @observable public settings: CSSProperties;
+  @observable public text: string;
 
-  constructor(name: string, settings: CSSProperties, cellId: string) {
+  constructor(name: string, cell: GridCell) {
     this.name = name;
-    this.settings = settings;
-    this.linkedCells.push(cellId);
+    this.linkedCells.push(cell.id);
+    this.settings = cell.settings;
+    this.text = cell.textSettings.text;
   }
 
   public hasLinkedCell(cellId: string) {
@@ -19,5 +21,6 @@ export class CellTemplate {
 
   public updateTemplate(cell: GridCell) {
     this.settings = { ...cell.settings };
+    this.text = cell.textSettings.text;
   }
 }
