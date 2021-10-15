@@ -67,6 +67,13 @@ export class GridZoneToolbar extends React.Component<Props> {
             onClick={currentGrid.toggleGridGap}
             outlined={currentGrid.showGridGap}
           />
+          <Button
+            icon={'eraser'}
+            minimal
+            outlined={plannerState.eraserActive}
+            onClick={plannerState.toggleEraser}
+          />
+
           {isPainting && (
             <Button icon={'style'} minimal outlined onClick={plannerState.stopPaintingTemplate} />
           )}

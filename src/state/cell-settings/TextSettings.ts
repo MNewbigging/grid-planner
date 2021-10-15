@@ -2,7 +2,6 @@ import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
 import { EnumUtils } from '../../utils/EnumUtils';
-import { CellTemplate } from '../CellTemplate';
 
 export enum TextAlign {
   START = 'start',
@@ -20,30 +19,25 @@ export class TextSettings {
   @observable public text = '';
   @observable public xAlign: TextAlign;
   @observable public yAlign: TextAlign;
-  @observable public bold = false;
-  @observable public italic = false;
-  @observable public decoration = TextDecoration.NONE;
-  @observable public color = 'rgba(24, 32, 38, 1)';
-  @observable public size = 14;
+  @observable public bold: boolean;
+  @observable public italic: boolean;
+  @observable public decoration: TextDecoration;
+  @observable public color: string;
+  @observable public size: number;
   @observable public settings: CSSProperties;
 
   constructor(settings: CSSProperties) {
     this.settings = settings;
 
     // Apply default settings
-    this.setTextAlignX(TextAlign.START);
-    this.setTextAlignY(TextAlign.START);
-    this.setDecoration(TextDecoration.NONE);
-
-    this.settings.color = this.color;
-    this.setSize(this.size);
+    this.initDefaultValues();
   }
 
   public updateSettings(settings: CSSProperties, text: string) {
     this.settings = settings;
     this.text = text;
 
-    this.initValues(settings);
+    this.initValuesFromSettings(settings);
   }
 
   public isXAlignSelected(textAlign: TextAlign) {
@@ -121,7 +115,24 @@ export class TextSettings {
     this.settings.fontSize = `${this.size}px`;
   };
 
-  private initValues(settings: CSSProperties) {
+  @action public initDefaultValues() {
+    this.setText('');
+    this.setTextAlignX(TextAlign.START);
+    this.setTextAlignY(TextAlign.START);
+    this.setDecoration(TextDecoration.NONE);
+    this.setSize(14);
+
+    this.color = 'rgba(24, 32, 38, 1)';
+    this.settings.color = 'rgba(24, 32, 38, 1)';
+
+    this.bold = false;
+    this.settings.fontWeight = 'normal';
+
+    this.italic = false;
+    this.settings.fontStyle = 'normal';
+  }
+
+  private initValuesFromSettings(settings: CSSProperties) {
     // Set values from settings
     this.xAlign = EnumUtils.getEnumKey(TextAlign, settings.justifyContent);
     this.yAlign = EnumUtils.getEnumKey(TextAlign, settings.alignItems);

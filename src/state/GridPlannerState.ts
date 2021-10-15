@@ -13,17 +13,39 @@ export enum DetailsPanelFocus {
   TEMPLATES = 'templates',
 }
 
+enum CurrentAction {
+  NONE = 'none',
+  APPLY_TEMPLATE = 'apply-template',
+  ERASING = 'erasing',
+}
+
 export class GridPlannerState {
   @observable public detailsPanelFocus = DetailsPanelFocus.GRID_PLAN;
   @observable.ref public gridPlan?: GridPlan;
   @observable public cellTemplates: CellTemplate[] = [];
   @observable.ref public paintingTemplate?: CellTemplate;
+  @observable public eraserActive = false;
+  private currentAction = CurrentAction.NONE;
 
   @action public setFocus(focus: DetailsPanelFocus) {
     this.detailsPanelFocus = focus;
   }
 
   @action public selectCell(cell: GridCell) {
+    switch (this.currentAction) {
+      case CurrentAction.NONE:
+        this.setFocus(DetailsPanelFocus.GRID_CELL);
+        break;
+      case CurrentAction.APPLY_TEMPLATE:
+        if (this.paintingTemplate) {
+          cell.applyTemplate(this.paintingTemplate);
+        }
+        break;
+      case CurrentAction.ERASING:
+        cell.reset();
+        break;
+    }
+
     // Are we painting a template just now?
     if (!this.paintingTemplate) {
       this.setFocus(DetailsPanelFocus.GRID_CELL);
@@ -68,6 +90,7 @@ export class GridPlannerState {
 
   @action public paintTemplate(id: string) {
     this.paintingTemplate = this.cellTemplates.find((tmp) => tmp.id === id);
+    this.currentAction = CurrentAction.APPLY_TEMPLATE;
 
     toastManager.toast(
       'Click and drag to paint the template over grid cells. To cancel, click the paint button in the toolbar.'
@@ -80,7 +103,14 @@ export class GridPlannerState {
 
   @action public stopPaintingTemplate = () => {
     this.paintingTemplate = undefined;
+    this.currentAction = CurrentAction.NONE;
 
     toastManager.toast('Exited template painting mode');
+  };
+
+  @action public toggleEraser = () => {
+    this.eraserActive = !this.eraserActive;
+
+    this.currentAction = this.eraserActive ? CurrentAction.ERASING : CurrentAction.NONE;
   };
 }

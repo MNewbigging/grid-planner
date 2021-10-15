@@ -41,6 +41,10 @@ export class GridCell {
     this.leftBorderSettings.applyProps(template.leftBorderProps);
   }
 
+  @action public reset() {
+    this.textSettings.initDefaultValues();
+  }
+
   @action public setBackgroundColor = (color: ColorResult) => {
     const rgba = color.rgb;
     this.settings.backgroundColor = `rgba( ${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
