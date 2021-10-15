@@ -120,6 +120,7 @@ export class TextSettings {
     this.italic = settings.fontStyle === 'italic';
     this.decoration = EnumUtils.getEnumKey(TextDecoration, settings.textDecoration as string);
     this.color = settings.color;
-    this.size = settings.fontSize as number;
+    const size = settings.fontSize as string;
+    this.size = parseInt(size.split('px')[0]);
   }
 }
