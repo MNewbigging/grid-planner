@@ -33,7 +33,7 @@ export class GridCell {
     this.settings = { ...template.settings };
 
     // Update settings classes with new values
-    this.textSettings.fromTemplate(template);
+    this.textSettings.updateSettings(this.settings, template.text);
     this.allBorderSettings.applyProps(template.allBorderProps);
     this.topBorderSettings.applyProps(template.topBorderProps);
     this.rightBorderSettings.applyProps(template.rightBorderProps);

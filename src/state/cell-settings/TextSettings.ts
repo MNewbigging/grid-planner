@@ -25,8 +25,11 @@ export class TextSettings {
   @observable public decoration = TextDecoration.NONE;
   @observable public color = 'rgba(24, 32, 38, 1)';
   @observable public size = 14;
+  @observable public settings: CSSProperties;
 
-  constructor(private settings: CSSProperties) {
+  constructor(settings: CSSProperties) {
+    this.settings = settings;
+
     // Apply default settings
     this.setTextAlignX(TextAlign.START);
     this.setTextAlignY(TextAlign.START);
@@ -36,11 +39,11 @@ export class TextSettings {
     this.setSize(this.size);
   }
 
-  public fromTemplate(template: CellTemplate) {
-    this.text = template.text;
+  public updateSettings(settings: CSSProperties, text: string) {
+    this.settings = settings;
+    this.text = text;
 
-    // Set values from settings
-    this.initValues(template.settings);
+    this.initValues(settings);
   }
 
   public isXAlignSelected(textAlign: TextAlign) {
