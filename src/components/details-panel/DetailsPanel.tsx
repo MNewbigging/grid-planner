@@ -64,7 +64,12 @@ export class DetailsPanel extends React.Component<Props> {
         break;
       }
       case DetailsPanelFocus.TEMPLATES: {
-        panelContent = <CellTemplates templates={plannerState.cellTemplates} />;
+        panelContent = (
+          <CellTemplates
+            templates={plannerState.cellTemplates}
+            deleteTemplate={(id: string) => plannerState.deleteTemplate(id)}
+          />
+        );
         headingProps = { text: 'Cell templates', icon: 'duplicate' };
       }
     }

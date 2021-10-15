@@ -48,4 +48,8 @@ export class GridPlannerState {
 
     return undefined;
   }
+
+  @action public deleteTemplate(id: string) {
+    this.cellTemplates = this.cellTemplates.filter((tmp) => tmp.id !== id);
+  }
 }

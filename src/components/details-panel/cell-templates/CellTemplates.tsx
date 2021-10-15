@@ -9,6 +9,7 @@ import './cell-templates.scss';
 
 interface Props {
   templates: CellTemplate[];
+  deleteTemplate: (id: string) => void;
 }
 
 @observer
@@ -38,8 +39,10 @@ export class CellTemplates extends React.Component<Props> {
   }
 
   private renderTemplateRow(template: CellTemplate) {
+    const { deleteTemplate } = this.props;
+
     return (
-      <div className={'template-row'}>
+      <div key={template.id} className={'template-row'}>
         <Popover2 content={this.renderTemplatePreview(template)} placement={Position.RIGHT}>
           <div className={'template-preview-small'} style={{ ...template.settings }}>
             <Text ellipsize>{template.text}</Text>
@@ -53,7 +56,7 @@ export class CellTemplates extends React.Component<Props> {
         <div className={'template-actions'}>
           <Button icon={'style'} minimal outlined />
           <Button icon={'edit'} minimal outlined />
-          <Button icon={'trash'} minimal outlined />
+          <Button icon={'trash'} minimal outlined onClick={() => deleteTemplate(template.id)} />
         </div>
       </div>
     );
