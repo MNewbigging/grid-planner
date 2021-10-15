@@ -30,14 +30,8 @@ export class GridPlanner extends React.Component {
         </div>
         <div className={'grid-zone-area'}>
           <GridZone
+            plannerState={this.gridPlannerState}
             gridPlan={this.gridPlannerState.gridPlan}
-            setFocus={(focus: DetailsPanelFocus) => this.gridPlannerState.setFocus(focus)}
-            onCellSelect={(cell: GridCell) => this.gridPlannerState.selectCell(cell)}
-            stopPainting={
-              this.gridPlannerState.isPainting()
-                ? this.gridPlannerState.stopPaintingTemplate
-                : undefined
-            }
           />
         </div>
       </div>

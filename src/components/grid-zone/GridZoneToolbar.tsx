@@ -4,20 +4,19 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { GridPlan } from '../../state/GridPlan';
-import { DetailsPanelFocus } from '../../state/GridPlannerState';
+import { DetailsPanelFocus, GridPlannerState } from '../../state/GridPlannerState';
 
 import './grid-zone-toolbar.scss';
 
 interface Props {
+  plannerState: GridPlannerState;
   gridPlan: GridPlan;
-  setFocus: (focus: DetailsPanelFocus) => void;
-  stopPainting?: () => void;
 }
 
 @observer
 export class GridZoneToolbar extends React.Component<Props> {
   public render() {
-    const { gridPlan, setFocus, stopPainting } = this.props;
+    const { plannerState, gridPlan } = this.props;
 
     const currentGrid = gridPlan.selectedGrid;
 
@@ -29,6 +28,8 @@ export class GridZoneToolbar extends React.Component<Props> {
     const disableLast = lastIndex < 0;
     const disableNext = nextIndex === gridPlan.grids.length;
 
+    const isPainting = plannerState.isPainting();
+
     return (
       <Navbar className={'grid-zone-toolbar'}>
         <Navbar.Group align={Alignment.CENTER}>
@@ -38,7 +39,10 @@ export class GridZoneToolbar extends React.Component<Props> {
             disabled={disableLast}
             onClick={() => gridPlan.selectGridByIndex(lastIndex)}
           />
-          <Text className={'selected-grid-name'} onClick={() => setFocus(DetailsPanelFocus.GRID)}>
+          <Text
+            className={'selected-grid-name'}
+            onClick={() => plannerState.setFocus(DetailsPanelFocus.GRID)}
+          >
             {currentGrid.name}
           </Text>
           <Button
@@ -63,7 +67,9 @@ export class GridZoneToolbar extends React.Component<Props> {
             onClick={currentGrid.toggleGridGap}
             outlined={currentGrid.showGridGap}
           />
-          {stopPainting && <Button icon={'style'} minimal outlined onClick={stopPainting} />}
+          {isPainting && (
+            <Button icon={'style'} minimal outlined onClick={plannerState.stopPaintingTemplate} />
+          )}
         </Navbar.Group>
       </Navbar>
     );
