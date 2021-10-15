@@ -25,7 +25,7 @@ export class GridCell {
     this.textSettings = new TextSettings(this.settings);
 
     // Default background colour
-    this.settings.backgroundColor = '#FFFFFF';
+    this.settings.backgroundColor = 'rgba(255, 255, 255, 1)';
   }
 
   @action public applyTemplate(template: CellTemplate) {
@@ -42,6 +42,11 @@ export class GridCell {
   }
 
   @action public reset() {
+    this.settings.backgroundColor = 'rgba(255, 255, 255, 1)';
+    this.bgImageName = '';
+    this.settings.backgroundImage = '';
+    this.templateId = '';
+
     this.textSettings.setDefaultValues();
     this.allBorderSettings.setDefaultValues();
     this.topBorderSettings.setDefaultValues();
