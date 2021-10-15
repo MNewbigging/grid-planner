@@ -14,6 +14,23 @@ interface Props {
 
 @observer
 export class GridRenderer extends React.Component<Props> {
+  private gridRef = React.createRef<HTMLDivElement>();
+  private mousedown = false;
+
+  componentDidMount() {
+    if (this.gridRef.current) {
+      this.gridRef.current.addEventListener('mousedown', this.onMouseDown);
+      this.gridRef.current.addEventListener('mouseup', this.onMouseUp);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.gridRef.current) {
+      this.gridRef.current.removeEventListener('mousedown', this.onMouseDown);
+      this.gridRef.current.removeEventListener('mouseup', this.onMouseUp);
+    }
+  }
+
   public render() {
     const { grid, onCellSelect } = this.props;
 
@@ -25,15 +42,31 @@ export class GridRenderer extends React.Component<Props> {
           grid.selectCell(cell);
           onCellSelect(cell);
         }}
+        onMouseEnter={() => this.onMouseEnterCell(cell)}
       />
     ));
 
     return (
       <div className={'grid-renderer'}>
-        <div className={'grid-container'} style={{ ...grid.settings }}>
+        <div ref={this.gridRef} className={'grid-container'} style={{ ...grid.settings }}>
           {gridCells}
         </div>
       </div>
     );
+  }
+
+  private onMouseDown = () => {
+    this.mousedown = true;
+  };
+
+  private onMouseUp = () => {
+    this.mousedown = false;
+  };
+
+  private onMouseEnterCell(cell: GridCell) {
+    // Only perform a click if mouse is held down
+    if (this.mousedown) {
+      this.props.onCellSelect(cell);
+    }
   }
 }

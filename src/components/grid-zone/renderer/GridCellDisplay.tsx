@@ -9,18 +9,20 @@ import './grid-cell-display.scss';
 interface Props {
   gridCell: GridCell;
   onClick: () => void;
+  onMouseEnter: () => void;
 }
 
 @observer
 export class GridCellDisplay extends React.Component<Props> {
   public render() {
-    const { gridCell, onClick } = this.props;
+    const { gridCell, onClick, onMouseEnter } = this.props;
 
     return (
       <div
         className={'grid-cell-display'}
         style={{ ...gridCell.settings }}
         onClick={() => onClick()}
+        onMouseEnter={onMouseEnter}
       >
         <Text>{gridCell.textSettings.text}</Text>
       </div>
