@@ -30,7 +30,7 @@ export class GridCell {
 
   @action public applyTemplate(template: CellTemplate) {
     // Override settings with template settings
-    this.settings = template.settings;
+    this.settings = { ...template.settings };
 
     // Update settings classes with new values
     this.textSettings = new TextSettings(this.settings).fromTemplate(template);

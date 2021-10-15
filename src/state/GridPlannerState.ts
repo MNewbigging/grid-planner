@@ -23,7 +23,7 @@ export class GridPlannerState {
     this.detailsPanelFocus = focus;
   }
 
-  public selectCell(cell: GridCell) {
+  @action public selectCell(cell: GridCell) {
     // Are we painting a template just now?
     if (!this.paintingTemplate) {
       this.setFocus(DetailsPanelFocus.GRID_CELL);

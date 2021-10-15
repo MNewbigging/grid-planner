@@ -18,15 +18,23 @@ export enum TextDecoration {
 
 export class TextSettings {
   @observable public text = '';
-  @observable public xAlign = TextAlign.START;
-  @observable public yAlign = TextAlign.START;
+  @observable public xAlign: TextAlign;
+  @observable public yAlign: TextAlign;
   @observable public bold = false;
   @observable public italic = false;
   @observable public decoration = TextDecoration.NONE;
-  @observable public color = '#182026';
+  @observable public color = 'rgba(24, 32, 38, 1)';
   @observable public size = 14;
 
-  constructor(private settings: CSSProperties) {}
+  constructor(private settings: CSSProperties) {
+    // Apply default settings
+    this.setTextAlignX(TextAlign.START);
+    this.setTextAlignY(TextAlign.START);
+    this.setDecoration(TextDecoration.NONE);
+
+    this.settings.color = this.color;
+    this.setSize(this.size);
+  }
 
   public fromTemplate(template: CellTemplate) {
     this.text = template.text;

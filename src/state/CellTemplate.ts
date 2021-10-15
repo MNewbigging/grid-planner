@@ -21,7 +21,7 @@ export class CellTemplate {
     this.id = RandomUtils.createId();
     this.name = name;
     this.linkedCells.push(cell.id);
-    this.settings = cell.settings;
+    this.settings = { ...cell.settings };
     this.text = cell.textSettings.text;
     this.allBorderProps = cell.allBorderSettings.toProps();
     this.topBorderProps = cell.topBorderSettings.toProps();
