@@ -41,8 +41,6 @@ export class TextSettings {
 
     // Set values from settings
     this.initValues(template.settings);
-
-    return this;
   }
 
   public isXAlignSelected(textAlign: TextAlign) {
