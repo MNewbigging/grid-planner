@@ -23,3 +23,18 @@
     }
   }
 }
+
+.preview-container {
+  padding: 10px;
+
+  .template-preview {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    cursor: pointer;
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+  }
+}

@@ -1,4 +1,5 @@
-import { FormGroup, NonIdealState, Text } from '@blueprintjs/core';
+import { Button, NonIdealState, Position, Text } from '@blueprintjs/core';
+import { Popover2 } from '@blueprintjs/popover2';
 import { observer } from 'mobx-react';
 import React from 'react';
 
@@ -42,6 +43,19 @@ export class CellTemplates extends React.Component<Props> {
         <Text>{template.name}</Text>
         <div className={'template-display'} style={{ ...template.settings }}>
           <Text ellipsize>{template.text}</Text>
+        </div>
+        <Popover2 content={this.renderTemplatePreview(template)} placement={Position.RIGHT}>
+          <Button icon={'zoom-in'} minimal outlined />
+        </Popover2>
+      </div>
+    );
+  }
+
+  private renderTemplatePreview(template: CellTemplate) {
+    return (
+      <div className={'preview-container'}>
+        <div className={'template-preview'} style={{ ...template.settings }}>
+          <Text>{template.text}</Text>
         </div>
       </div>
     );
