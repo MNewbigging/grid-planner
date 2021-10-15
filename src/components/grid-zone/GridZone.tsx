@@ -1,22 +1,25 @@
 import { Button, Intent, NonIdealState } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
+
 import { GridPlan } from '../../state/GridPlan';
 import { DetailsPanelFocus } from '../../state/GridPlannerState';
-
-import './grid-zone.scss';
 import { GridRenderer } from './renderer/GridRenderer';
 import { GridZoneToolbar } from './GridZoneToolbar';
+import { GridCell } from '../../state/GridCell';
+
+import './grid-zone.scss';
 
 interface Props {
   gridPlan: GridPlan;
   setFocus: (focus: DetailsPanelFocus) => void;
+  onCellSelect: (cell: GridCell) => void;
 }
 
 @observer
 export class GridZone extends React.Component<Props> {
   public render() {
-    const { gridPlan, setFocus } = this.props;
+    const { gridPlan, setFocus, onCellSelect } = this.props;
 
     let content: JSX.Element = undefined;
 
@@ -30,7 +33,7 @@ export class GridZone extends React.Component<Props> {
       content = this.renderNoSelectedGridCta();
     } else {
       // There are grids to render
-      content = <GridRenderer grid={gridPlan.selectedGrid} setFocus={setFocus} />;
+      content = <GridRenderer grid={gridPlan.selectedGrid} onCellSelect={onCellSelect} />;
     }
 
     return (

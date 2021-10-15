@@ -68,6 +68,7 @@ export class DetailsPanel extends React.Component<Props> {
           <CellTemplates
             templates={plannerState.cellTemplates}
             deleteTemplate={(id: string) => plannerState.deleteTemplate(id)}
+            paintTemplate={(id: string) => plannerState.paintTemplate(id)}
           />
         );
         headingProps = { text: 'Cell templates', icon: 'duplicate' };

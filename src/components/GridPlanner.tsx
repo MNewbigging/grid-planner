@@ -8,6 +8,7 @@ import { GridZone } from './grid-zone/GridZone';
 import { VerticalNavbar } from './navbar/VerticalNavbar';
 
 import './grid-planner.scss';
+import { GridCell } from '../state/GridCell';
 
 @observer
 export class GridPlanner extends React.Component {
@@ -31,6 +32,7 @@ export class GridPlanner extends React.Component {
           <GridZone
             gridPlan={this.gridPlannerState.gridPlan}
             setFocus={(focus: DetailsPanelFocus) => this.gridPlannerState.setFocus(focus)}
+            onCellSelect={(cell: GridCell) => this.gridPlannerState.selectCell(cell)}
           />
         </div>
       </div>

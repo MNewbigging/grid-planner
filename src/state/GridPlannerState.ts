@@ -17,9 +17,20 @@ export class GridPlannerState {
   @observable public detailsPanelFocus = DetailsPanelFocus.GRID_PLAN;
   @observable.ref public gridPlan?: GridPlan;
   @observable public cellTemplates: CellTemplate[] = [];
+  @observable.ref public paintingTemplate?: CellTemplate;
 
   @action public setFocus(focus: DetailsPanelFocus) {
     this.detailsPanelFocus = focus;
+  }
+
+  public selectCell(cell: GridCell) {
+    // Are we painting a template just now?
+    if (!this.paintingTemplate) {
+      this.setFocus(DetailsPanelFocus.GRID_CELL);
+    } else {
+      // Apply the template to this cell
+      cell.applyTemplate(this.paintingTemplate);
+    }
   }
 
   @action public createGridPlan() {
@@ -36,7 +47,7 @@ export class GridPlannerState {
     const template = new CellTemplate(templateName, cell);
     this.cellTemplates.push(template);
 
-    toastManager.okToast('Created cell template');
+    toastManager.successToast('Created cell template');
   }
 
   public getLinkedTemplate(cell: GridCell): CellTemplate | undefined {
@@ -51,5 +62,13 @@ export class GridPlannerState {
 
   @action public deleteTemplate(id: string) {
     this.cellTemplates = this.cellTemplates.filter((tmp) => tmp.id !== id);
+  }
+
+  @action public paintTemplate(id: string) {
+    this.paintingTemplate = this.cellTemplates.find((tmp) => tmp.id === id);
+
+    toastManager.toast(
+      'Click and drag to paint the template over grid cells. To cancel, press Escape or click outside the grid'
+    );
   }
 }

@@ -20,6 +20,7 @@ import './cell-templates.scss';
 interface Props {
   templates: CellTemplate[];
   deleteTemplate: (id: string) => void;
+  paintTemplate: (id: string) => void;
 }
 
 @observer
@@ -51,7 +52,7 @@ export class CellTemplates extends React.Component<Props> {
   }
 
   private renderTemplateRow(template: CellTemplate) {
-    const { deleteTemplate } = this.props;
+    const { deleteTemplate, paintTemplate } = this.props;
 
     return (
       <div key={template.id} className={'template-row'}>
@@ -66,7 +67,7 @@ export class CellTemplates extends React.Component<Props> {
         </Text>
 
         <div className={'template-actions'}>
-          <Button icon={'style'} minimal outlined />
+          <Button icon={'style'} minimal outlined onClick={() => paintTemplate(template.id)} />
 
           <Popover2 content={this.renderTemplateNameEditor(template)}>
             <Button icon={'edit'} minimal outlined />

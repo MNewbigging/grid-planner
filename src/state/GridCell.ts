@@ -3,6 +3,7 @@ import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
 import { BorderSettings } from './cell-settings/BorderSettings';
 import { TextSettings } from './cell-settings/TextSettings';
+import { CellTemplate } from './CellTemplate';
 
 export class GridCell {
   public id: string;
@@ -29,6 +30,14 @@ export class GridCell {
 
     // Default background colour
     this.settings.backgroundColor = 'white';
+  }
+
+  @action public applyTemplate(template: CellTemplate) {
+    // Override settings with template settings
+    this.settings = template.settings;
+
+    // Update settings classes with new values
+    this.textSettings = new TextSettings(this.settings).fromTemplate(template);
   }
 
   @action public setBackgroundColor = (color: ColorResult) => {

@@ -5,8 +5,12 @@ class ToastManager {
     position: Position.TOP,
   });
 
-  public okToast(message: string) {
-    this.toaster.show({ message, intent: Intent.PRIMARY });
+  public successToast(message: string) {
+    this.toaster.show({ message, intent: Intent.SUCCESS });
+  }
+
+  public toast(message: string) {
+    this.toaster.show({ message });
   }
 }
 

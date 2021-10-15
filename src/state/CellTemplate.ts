@@ -27,7 +27,7 @@ export class CellTemplate {
     this.settings = { ...cell.settings };
     this.text = cell.textSettings.text;
 
-    toastManager.okToast('Updated cell template');
+    toastManager.successToast('Updated cell template');
   }
 
   @action setName(name: string) {

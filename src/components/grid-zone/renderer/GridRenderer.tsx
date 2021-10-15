@@ -1,21 +1,21 @@
 import { observer } from 'mobx-react';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 import { Grid } from '../../../state/Grid';
 import { GridCellDisplay } from './GridCellDisplay';
-import { DetailsPanelFocus } from '../../../state/GridPlannerState';
+import { GridCell } from '../../../state/GridCell';
 
 import './grid-renderer.scss';
 
 interface Props {
   grid: Grid;
-  setFocus: (focus: DetailsPanelFocus) => void;
+  onCellSelect: (cell: GridCell) => void;
 }
 
 @observer
 export class GridRenderer extends React.Component<Props> {
   public render() {
-    const { grid, setFocus } = this.props;
+    const { grid, onCellSelect } = this.props;
 
     const gridCells = grid.cells.map((cell) => (
       <GridCellDisplay
@@ -23,7 +23,7 @@ export class GridRenderer extends React.Component<Props> {
         gridCell={cell}
         onClick={() => {
           grid.selectCell(cell);
-          setFocus(DetailsPanelFocus.GRID_CELL);
+          onCellSelect(cell);
         }}
       />
     ));

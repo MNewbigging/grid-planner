@@ -1,6 +1,8 @@
 import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
+import { EnumUtils } from '../../utils/EnumUtils';
+import { CellTemplate } from '../CellTemplate';
 
 export enum TextAlign {
   START = 'start',
@@ -25,6 +27,22 @@ export class TextSettings {
   @observable public size = 14;
 
   constructor(private settings: CSSProperties) {}
+
+  public fromTemplate(template: CellTemplate) {
+    this.text = template.text;
+
+    // Set values from settings
+    const settings = template.settings;
+    this.xAlign = EnumUtils.getEnumKey(TextAlign, settings.justifyContent);
+    this.yAlign = EnumUtils.getEnumKey(TextAlign, settings.alignItems);
+    this.bold = settings.fontWeight === 'bold';
+    this.italic = settings.fontStyle === 'italic';
+    this.decoration = EnumUtils.getEnumKey(TextDecoration, settings.textDecoration as string);
+    this.color = settings.color;
+    this.size = settings.fontSize as number;
+
+    return this;
+  }
 
   public isXAlignSelected(textAlign: TextAlign) {
     return textAlign === this.xAlign;
