@@ -21,6 +21,7 @@ export class GridRenderer extends React.Component<Props> {
     if (this.gridRef.current) {
       this.gridRef.current.addEventListener('mousedown', this.onMouseDown);
       this.gridRef.current.addEventListener('mouseup', this.onMouseUp);
+      this.gridRef.current.addEventListener('dragend', this.onMouseUp);
     }
   }
 
@@ -28,6 +29,7 @@ export class GridRenderer extends React.Component<Props> {
     if (this.gridRef.current) {
       this.gridRef.current.removeEventListener('mousedown', this.onMouseDown);
       this.gridRef.current.removeEventListener('mouseup', this.onMouseUp);
+      this.gridRef.current.removeEventListener('dragend', this.onMouseUp);
     }
   }
 

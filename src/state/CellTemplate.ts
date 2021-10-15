@@ -34,6 +34,10 @@ export class CellTemplate {
     return this.linkedCells.includes(cellId);
   }
 
+  public linkCell(id: string) {
+    this.linkedCells.push(id);
+  }
+
   public updateTemplate(cell: GridCell) {
     this.settings = { ...cell.settings };
     this.text = cell.textSettings.text;

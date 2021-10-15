@@ -23,6 +23,7 @@ export class GridCellDisplay extends React.Component<Props> {
         style={{ ...gridCell.settings }}
         onClick={() => onClick()}
         onMouseEnter={onMouseEnter}
+        onMouseDown={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
       >
         <Text>{gridCell.textSettings.text}</Text>
       </div>

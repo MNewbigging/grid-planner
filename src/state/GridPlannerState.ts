@@ -30,6 +30,8 @@ export class GridPlannerState {
     } else {
       // Apply the template to this cell
       cell.applyTemplate(this.paintingTemplate);
+      // Link this cell to the template
+      // TODO
     }
   }
 
@@ -43,7 +45,7 @@ export class GridPlannerState {
   }
 
   @action public createTemplate(cell: GridCell) {
-    const templateName = `Template ${this.cellTemplates.length}`;
+    const templateName = `Template ${this.cellTemplates.length + 1}`;
     const template = new CellTemplate(templateName, cell);
     this.cellTemplates.push(template);
 
@@ -68,7 +70,7 @@ export class GridPlannerState {
     this.paintingTemplate = this.cellTemplates.find((tmp) => tmp.id === id);
 
     toastManager.toast(
-      'Click and drag to paint the template over grid cells. To cancel, press Escape or click the paint button in the toolbar.'
+      'Click and drag to paint the template over grid cells. To cancel, click the paint button in the toolbar.'
     );
   }
 
