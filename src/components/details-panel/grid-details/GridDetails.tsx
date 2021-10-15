@@ -17,6 +17,7 @@ export class GridDetails extends React.Component<Props> {
   @observable private dimensionsApplyLoading = false;
   @observable private rows = this.props.grid.rows;
   @observable private columns = this.props.grid.columns;
+  @observable private cellSize = this.props.grid.cellSize;
 
   public render() {
     const { grid } = this.props;
@@ -58,8 +59,9 @@ export class GridDetails extends React.Component<Props> {
           <NumberInput
             id={'cell-size'}
             label={'Pixels'}
-            value={grid.cellSize}
-            onChange={grid.setCellSize}
+            value={this.cellSize}
+            onChange={this.setCellSize}
+            onBlur={this.applyCellSize}
             size={NumberInputSize.MEDIUM}
           />
         </FormGroup>
@@ -123,5 +125,17 @@ export class GridDetails extends React.Component<Props> {
   private createCells = async () => {
     await this.props.grid.createCells(this.rows, this.columns);
     this.dimensionsApplyLoading = false;
+  };
+
+  @action private setCellSize = (size: number) => {
+    this.cellSize = size;
+  };
+
+  @action private applyCellSize = () => {
+    if (this.cellSize > 0) {
+      this.props.grid.setCellSize(this.cellSize);
+    } else {
+      this.cellSize = this.props.grid.cellSize;
+    }
   };
 }

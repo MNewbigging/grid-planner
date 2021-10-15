@@ -16,12 +16,13 @@ interface Props {
   onChange: (value: number) => void;
   id?: string;
   size?: NumberInputSize;
+  onBlur?: (value: number) => void;
 }
 
 @observer
 export class NumberInput extends React.Component<Props> {
   public render() {
-    const { label, value, onChange, id, size } = this.props;
+    const { label, value, onChange, id, size, onBlur } = this.props;
 
     const inputSize = size ?? NumberInputSize.FILL;
 
@@ -33,6 +34,7 @@ export class NumberInput extends React.Component<Props> {
           buttonPosition={'none'}
           value={value}
           onValueChange={(val: number) => onChange(val)}
+          onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onBlur(parseInt(e.target.value, 10))}
         />
       </div>
     );
