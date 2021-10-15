@@ -38,4 +38,14 @@ export class GridPlannerState {
 
     toastManager.okToast('Created cell template');
   }
+
+  public getLinkedTemplate(cell: GridCell): CellTemplate | undefined {
+    for (const template of this.cellTemplates) {
+      if (template.hasLinkedCell(cell.id)) {
+        return template;
+      }
+    }
+
+    return undefined;
+  }
 }

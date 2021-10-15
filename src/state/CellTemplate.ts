@@ -1,5 +1,6 @@
 import { observable } from 'mobx';
 import { CSSProperties } from 'react';
+import { GridCell } from './GridCell';
 
 export class CellTemplate {
   @observable public name: string;
@@ -10,5 +11,13 @@ export class CellTemplate {
     this.name = name;
     this.settings = settings;
     this.linkedCells.push(cellId);
+  }
+
+  public hasLinkedCell(cellId: string) {
+    return this.linkedCells.includes(cellId);
+  }
+
+  public updateTemplate(cell: GridCell) {
+    this.settings = { ...cell.settings };
   }
 }

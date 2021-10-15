@@ -56,6 +56,7 @@ export class DetailsPanel extends React.Component<Props> {
               <GridCellActionRail
                 gridCell={grid.selectedCell}
                 createTemplate={() => plannerState.createTemplate(grid.selectedCell)}
+                linkedTemplate={plannerState.getLinkedTemplate(grid.selectedCell)}
               />
             ),
           };
