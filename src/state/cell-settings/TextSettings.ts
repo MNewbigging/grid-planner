@@ -104,11 +104,12 @@ export class TextSettings {
   };
 
   @action public setSize = (size: number) => {
-    if (size > 0) {
-      this.size = size;
-
-      this.settings.fontSize = `${this.size}px`;
+    if (isNaN(size) || size < 0) {
+      return;
     }
+
+    this.size = size;
+    this.settings.fontSize = `${this.size}px`;
   };
 
   private initValues(settings: CSSProperties) {
