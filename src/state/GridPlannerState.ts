@@ -68,7 +68,18 @@ export class GridPlannerState {
     this.paintingTemplate = this.cellTemplates.find((tmp) => tmp.id === id);
 
     toastManager.toast(
-      'Click and drag to paint the template over grid cells. To cancel, press Escape or click outside the grid'
+      'Click and drag to paint the template over grid cells. To cancel, press Escape or click the paint button in the toolbar.'
     );
   }
+
+  public isPainting() {
+    console.log('isPainting');
+    return this.paintingTemplate !== undefined;
+  }
+
+  @action public stopPaintingTemplate = () => {
+    this.paintingTemplate = undefined;
+
+    toastManager.toast('Exited template painting mode');
+  };
 }

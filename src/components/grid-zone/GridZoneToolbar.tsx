@@ -11,12 +11,13 @@ import './grid-zone-toolbar.scss';
 interface Props {
   gridPlan: GridPlan;
   setFocus: (focus: DetailsPanelFocus) => void;
+  stopPainting?: () => void;
 }
 
 @observer
 export class GridZoneToolbar extends React.Component<Props> {
   public render() {
-    const { gridPlan, setFocus } = this.props;
+    const { gridPlan, setFocus, stopPainting } = this.props;
 
     const currentGrid = gridPlan.selectedGrid;
 
@@ -62,6 +63,7 @@ export class GridZoneToolbar extends React.Component<Props> {
             onClick={currentGrid.toggleGridGap}
             outlined={currentGrid.showGridGap}
           />
+          {stopPainting && <Button icon={'style'} minimal outlined onClick={stopPainting} />}
         </Navbar.Group>
       </Navbar>
     );

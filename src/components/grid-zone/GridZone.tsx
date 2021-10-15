@@ -14,12 +14,13 @@ interface Props {
   gridPlan: GridPlan;
   setFocus: (focus: DetailsPanelFocus) => void;
   onCellSelect: (cell: GridCell) => void;
+  stopPainting?: () => void;
 }
 
 @observer
 export class GridZone extends React.Component<Props> {
   public render() {
-    const { gridPlan, setFocus, onCellSelect } = this.props;
+    const { gridPlan, setFocus, onCellSelect, stopPainting } = this.props;
 
     let content: JSX.Element = undefined;
 
@@ -33,13 +34,26 @@ export class GridZone extends React.Component<Props> {
       content = this.renderNoSelectedGridCta();
     } else {
       // There are grids to render
-      content = <GridRenderer grid={gridPlan.selectedGrid} onCellSelect={onCellSelect} />;
+      content = (
+        <GridRenderer
+          key={'grid-renderer'}
+          grid={gridPlan.selectedGrid}
+          onCellSelect={onCellSelect}
+        />
+      );
     }
 
     return (
       <div className={'grid-zone'}>
         <div className={'grid-zone-toolbar-area'}>
-          {!noGrids && <GridZoneToolbar gridPlan={gridPlan} setFocus={setFocus} />}
+          {!noGrids && (
+            <GridZoneToolbar
+              key={'grid-toolbar'}
+              gridPlan={gridPlan}
+              setFocus={setFocus}
+              stopPainting={stopPainting}
+            />
+          )}
         </div>
         <div className={'grid-zone-content'}>{content}</div>
       </div>

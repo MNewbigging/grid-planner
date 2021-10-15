@@ -6,9 +6,9 @@ import { DetailsPanelFocus, GridPlannerState } from '../state/GridPlannerState';
 import { DetailsPanel } from './details-panel/DetailsPanel';
 import { GridZone } from './grid-zone/GridZone';
 import { VerticalNavbar } from './navbar/VerticalNavbar';
+import { GridCell } from '../state/GridCell';
 
 import './grid-planner.scss';
-import { GridCell } from '../state/GridCell';
 
 @observer
 export class GridPlanner extends React.Component {
@@ -33,6 +33,11 @@ export class GridPlanner extends React.Component {
             gridPlan={this.gridPlannerState.gridPlan}
             setFocus={(focus: DetailsPanelFocus) => this.gridPlannerState.setFocus(focus)}
             onCellSelect={(cell: GridCell) => this.gridPlannerState.selectCell(cell)}
+            stopPainting={
+              this.gridPlannerState.isPainting()
+                ? this.gridPlannerState.stopPaintingTemplate
+                : undefined
+            }
           />
         </div>
       </div>
