@@ -1,9 +1,12 @@
 import { Button } from '@blueprintjs/core';
 import React from 'react';
 
+import { GridCell } from '../../../state/GridCell';
+
 import './grid-cell-action-rail.scss';
 
 interface Props {
+  gridCell: GridCell;
   createTemplate: () => void;
 }
 

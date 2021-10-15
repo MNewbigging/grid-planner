@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx';
 
 import { RandomUtils } from '../utils/RandomUtils';
+import { toastManager } from '../utils/ToastManager';
 import { CellTemplate } from './CellTemplate';
 import { GridCell } from './GridCell';
 import { GridPlan } from './GridPlan';
@@ -31,6 +32,10 @@ export class GridPlannerState {
   }
 
   @action public createTemplate(cell: GridCell) {
-    //
+    const templateName = `Template ${this.cellTemplates.length}`;
+    const template = new CellTemplate(templateName, cell.settings, cell.id);
+    this.cellTemplates.push(template);
+
+    toastManager.okToast('Created cell template');
   }
 }

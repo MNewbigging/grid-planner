@@ -54,6 +54,7 @@ export class DetailsPanel extends React.Component<Props> {
             icon: 'new-grid-item',
             actionRail: (
               <GridCellActionRail
+                gridCell={grid.selectedCell}
                 createTemplate={() => plannerState.createTemplate(grid.selectedCell)}
               />
             ),
