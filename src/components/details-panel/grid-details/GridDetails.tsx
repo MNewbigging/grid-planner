@@ -85,33 +85,20 @@ export class GridDetails extends React.Component<Props> {
   }
 
   @action private setRows = (rows: number) => {
-    const { grid } = this.props;
-    // const rows = parseInt(e.target.value);
-
-    // Has the value changed?
-    if (rows === grid.rows) {
+    if (isNaN(rows) || rows < 0) {
       return;
     }
 
-    if (rows) {
-      this.rows = rows;
-    }
-
+    this.rows = rows;
     this.dimensionsApply = true;
   };
 
   @action private setColumns = (cols: number) => {
-    const { grid } = this.props;
-
-    // Has the value changed?
-    if (cols === grid.columns) {
+    if (isNaN(cols) || cols < 0) {
       return;
     }
 
-    if (cols) {
-      this.columns = cols;
-    }
-
+    this.columns = cols;
     this.dimensionsApply = true;
   };
 
