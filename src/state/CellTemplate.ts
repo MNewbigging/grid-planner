@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 import { RandomUtils } from '../utils/RandomUtils';
 import { toastManager } from '../utils/ToastManager';
@@ -28,5 +28,11 @@ export class CellTemplate {
     this.text = cell.textSettings.text;
 
     toastManager.okToast('Updated cell template');
+  }
+
+  @action setName(name: string) {
+    if (name) {
+      this.name = name;
+    }
   }
 }

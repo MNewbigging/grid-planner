@@ -50,3 +50,18 @@
     display: flex;
   }
 }
+
+.template-name-editor {
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .name-editor-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+  }
+}

@@ -1,4 +1,14 @@
-import { Button, NonIdealState, Position, Text } from '@blueprintjs/core';
+import {
+  Button,
+  Classes,
+  FormGroup,
+  InputGroup,
+  Intent,
+  NonIdealState,
+  Popover,
+  Position,
+  Text,
+} from '@blueprintjs/core';
 import { Popover2 } from '@blueprintjs/popover2';
 import { observer } from 'mobx-react';
 import React from 'react';
@@ -14,6 +24,8 @@ interface Props {
 
 @observer
 export class CellTemplates extends React.Component<Props> {
+  private templateName = '';
+
   public render() {
     const { templates } = this.props;
 
@@ -55,7 +67,10 @@ export class CellTemplates extends React.Component<Props> {
 
         <div className={'template-actions'}>
           <Button icon={'style'} minimal outlined />
-          <Button icon={'edit'} minimal outlined />
+
+          <Popover2 content={this.renderTemplateNameEditor(template)}>
+            <Button icon={'edit'} minimal outlined />
+          </Popover2>
           <Button icon={'trash'} minimal outlined onClick={() => deleteTemplate(template.id)} />
         </div>
       </div>
@@ -67,6 +82,33 @@ export class CellTemplates extends React.Component<Props> {
       <div className={'preview-container'}>
         <div className={'template-preview'} style={{ ...template.settings }}>
           <Text>{template.text}</Text>
+        </div>
+      </div>
+    );
+  }
+
+  private renderTemplateNameEditor(template: CellTemplate) {
+    this.templateName = template.name;
+
+    return (
+      <div className={'template-name-editor'}>
+        <FormGroup label={'Name'}>
+          <InputGroup
+            defaultValue={template.name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              (this.templateName = e.target.value)
+            }
+          />
+        </FormGroup>
+
+        <div className={'name-editor-actions'}>
+          <Button text={'Cancel'} className={Classes.POPOVER_DISMISS} />
+          <Button
+            text={'Save'}
+            className={Classes.POPOVER_DISMISS}
+            intent={Intent.PRIMARY}
+            onClick={() => template.setName(this.templateName)}
+          />
         </div>
       </div>
     );
