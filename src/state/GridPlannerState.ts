@@ -92,6 +92,9 @@ export class GridPlannerState {
     this.paintingTemplate = this.cellTemplates.find((tmp) => tmp.id === id);
     this.currentAction = CurrentAction.APPLY_TEMPLATE;
 
+    // Stop erasing
+    this.eraserActive = false;
+
     toastManager.toast(
       'Click and drag to paint the template over grid cells. To cancel, click the paint button in the toolbar.'
     );
@@ -110,6 +113,9 @@ export class GridPlannerState {
 
   @action public toggleEraser = () => {
     this.eraserActive = !this.eraserActive;
+
+    // Stop painting
+    this.paintingTemplate = undefined;
 
     this.currentAction = this.eraserActive ? CurrentAction.ERASING : CurrentAction.NONE;
   };
