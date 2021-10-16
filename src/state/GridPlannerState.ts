@@ -128,11 +128,23 @@ export class GridPlannerState {
     const gridPlanData = this.gridPlan.toData();
     const content = JSON.stringify(gridPlanData);
 
-    const file = new Blob([content], { type: 'text/plain' });
+    const file = new Blob([content], { type: 'application/json' });
 
     const a = document.createElement('a');
     a.href = URL.createObjectURL(file);
     a.download = 'grid-plan.json';
     a.click();
   };
+
+  public loadGridPlan(fileList: FileList) {
+    // Take first file
+    const file = fileList.item(0);
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      console.log('json: ', reader.result);
+    };
+
+    reader.readAsText(file);
+  }
 }

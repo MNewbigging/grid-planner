@@ -14,6 +14,10 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+
+  .load-file-input {
+    visibility: hidden;
+  }
 }
 
 .grid-planner {

@@ -2,17 +2,17 @@ import { Button, Dialog, Icon, Intent } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { DetailsPanelFocus, GridPlannerState } from '../state/GridPlannerState';
+import { GridPlannerState } from '../state/GridPlannerState';
 import { DetailsPanel } from './details-panel/DetailsPanel';
 import { GridZone } from './grid-zone/GridZone';
 import { VerticalNavbar } from './navbar/VerticalNavbar';
-import { GridCell } from '../state/GridCell';
 
 import './grid-planner.scss';
 
 @observer
 export class GridPlanner extends React.Component {
   private readonly gridPlannerState = new GridPlannerState();
+  private inputRef = React.createRef<HTMLInputElement>();
 
   public render() {
     // Show the entry dialog if there is no grid plan
@@ -52,7 +52,26 @@ export class GridPlanner extends React.Component {
               intent={Intent.PRIMARY}
               onClick={() => this.gridPlannerState.createGridPlan()}
             />
-            <Button icon={'document-open'} text={'Load grid plan'} disabled />
+            <Button
+              icon={'document-open'}
+              text={'Load grid plan'}
+              onClick={() => {
+                if (this.inputRef.current) {
+                  this.inputRef.current.click();
+                }
+              }}
+            />
+
+            <input
+              ref={this.inputRef}
+              type={'file'}
+              id={'load-file-input'}
+              className={'load-file-input'}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                this.gridPlannerState.loadGridPlan(e.currentTarget.files);
+                e.target.value = null;
+              }}
+            />
           </div>
         </Dialog>
       </div>
