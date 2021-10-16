@@ -14,8 +14,13 @@ export class GridPlan {
   constructor() {}
 
   @action public addGrid() {
+    const grid = new Grid();
+
     const gridName = `Grid ${this.grids.length}`;
-    const grid = new Grid(gridName);
+    grid.setName(gridName);
+
+    grid.createCells(grid.rows, grid.columns);
+
     this.grids.push(grid);
     this.selectedGrid = grid;
   }
@@ -41,5 +46,12 @@ export class GridPlan {
       id: this.id,
       grids: this.grids.map((grid) => grid.toData()),
     };
+  }
+
+  public fromData(data: GridPlanData) {
+    this.id = data.id;
+    this.grids = data.grids.map((gridData) => new Grid().fromData(gridData));
+
+    return this;
   }
 }

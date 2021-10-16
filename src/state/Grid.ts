@@ -6,7 +6,7 @@ import { GridCell } from './GridCell';
 
 export class Grid {
   public id: string = RandomUtils.createId();
-  @observable public name: string;
+  @observable public name = '';
   public rows: number = 5;
   public columns: number = 5;
   public cellSize: number = 100;
@@ -21,11 +21,7 @@ export class Grid {
     padding: '1px',
   };
 
-  constructor(name: string) {
-    this.name = name;
-
-    this.createCells(this.rows, this.columns);
-  }
+  constructor() {}
 
   @action public setName(name: string) {
     if (name) {
@@ -90,6 +86,18 @@ export class Grid {
       cellSize: this.cellSize,
       cells: this.cells.map((cell) => cell.toData()),
     };
+  }
+
+  @action public fromData(data: GridData) {
+    this.id = data.id;
+    this.name = data.name;
+    this.rows = data.rows;
+    this.columns = data.columns;
+    this.cellSize = data.cellSize;
+    this.cells = data.cells.map((cellData) => new GridCell().fromData(cellData));
+    this.updateGrid();
+
+    return this;
   }
 
   @action private updateGrid() {

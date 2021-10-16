@@ -60,6 +60,7 @@ export class GridPlanner extends React.Component {
                   this.inputRef.current.click();
                 }
               }}
+              loading={this.gridPlannerState.loadingGridPlan}
             />
 
             <input

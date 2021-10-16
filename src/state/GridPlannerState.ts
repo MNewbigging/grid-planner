@@ -21,6 +21,7 @@ enum CurrentAction {
 }
 
 export class GridPlannerState {
+  @observable public loadingGridPlan = false;
   @observable public detailsPanelFocus = DetailsPanelFocus.GRID_PLAN;
   @observable.ref public gridPlan?: GridPlan;
   @observable public cellTemplates: CellTemplate[] = [];
@@ -137,7 +138,7 @@ export class GridPlannerState {
     a.click();
   };
 
-  public readGridPlanFile(fileList: FileList) {
+  @action public readGridPlanFile(fileList: FileList) {
     // Take first file
     const file = fileList.item(0);
     const reader = new FileReader();
@@ -146,13 +147,22 @@ export class GridPlannerState {
       console.log('json: ', reader.result);
       const gridPlan: GridPlanData = JSON.parse(reader.result as string);
 
-      this.loadGridPlan(gridPlan);
+      this.loadingGridPlan = true;
+      setTimeout(() => this.loadGridPlan(gridPlan), 0);
     };
 
     reader.readAsText(file);
   }
 
-  private loadGridPlan(gridPlanData: GridPlanData) {
-    console.log('gridPlan:', gridPlanData);
+  @action private loadGridPlan(gridPlanData: GridPlanData) {
+    console.log('gridPlanData:', gridPlanData);
+
+    const gridPlan = new GridPlan().fromData(gridPlanData);
+
+    console.log('built plan:', gridPlan);
+
+    this.gridPlan = gridPlan;
+
+    this.loadingGridPlan = false;
   }
 }

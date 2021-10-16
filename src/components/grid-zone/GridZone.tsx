@@ -23,12 +23,13 @@ export class GridZone extends React.Component<Props> {
     let content: JSX.Element = undefined;
 
     const noGrids = !gridPlan.grids.length;
+    const noSelectedGrid = gridPlan.selectedGrid === undefined;
 
     // No grids, show call to action
     if (noGrids) {
       content = this.renderNoGridsCta();
       // No selected grid
-    } else if (gridPlan.selectedGrid === undefined) {
+    } else if (noSelectedGrid) {
       content = this.renderNoSelectedGridCta();
     } else {
       // There are grids to render
@@ -44,7 +45,7 @@ export class GridZone extends React.Component<Props> {
     return (
       <div className={'grid-zone'}>
         <div className={'grid-zone-toolbar-area'}>
-          {!noGrids && (
+          {!noGrids && !noSelectedGrid && (
             <GridZoneToolbar key={'grid-toolbar'} plannerState={plannerState} gridPlan={gridPlan} />
           )}
         </div>

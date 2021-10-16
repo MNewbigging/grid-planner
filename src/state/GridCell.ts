@@ -41,6 +41,15 @@ export class GridCell {
     this.leftBorderSettings.applyProps(template.leftBorderProps);
   }
 
+  @action public fromData(data: GridCellData) {
+    this.id = data.id;
+    this.settings = { ...data.settings };
+    this.bgImageName = data.bgImageName;
+    this.textSettings.setText(data.text);
+
+    return this;
+  }
+
   @action public reset() {
     this.settings.backgroundColor = 'rgba(255, 255, 255, 1)';
     this.bgImageName = '';
