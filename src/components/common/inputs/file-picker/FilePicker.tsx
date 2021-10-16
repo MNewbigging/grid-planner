@@ -1,6 +1,7 @@
-import { Button, FileInput, Text } from '@blueprintjs/core';
+import { FileInput, Text } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { StandardButton } from '../../buttons/StandardButton';
 
 import './file-picker.scss';
 
@@ -9,12 +10,13 @@ interface Props {
   onFile: (fileList: FileList) => void;
   fileName: string;
   onRemoveFile: () => void;
+  tooltipText?: string;
 }
 
 @observer
 export class FilePicker extends React.Component<Props> {
   public render() {
-    const { label, onFile, fileName, onRemoveFile } = this.props;
+    const { label, onFile, fileName, onRemoveFile, tooltipText } = this.props;
 
     return (
       <div className={'file-picker'}>
@@ -31,12 +33,13 @@ export class FilePicker extends React.Component<Props> {
             },
           }}
         />
-        <Button
+        <StandardButton
           className={'remove-button'}
           minimal
           outlined
           icon={'trash'}
           onClick={() => onRemoveFile()}
+          tooltipText={tooltipText}
         />
       </div>
     );

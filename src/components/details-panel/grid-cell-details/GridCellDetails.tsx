@@ -35,6 +35,7 @@ export class GridCellDetails extends React.Component<Props> {
               fileName={gridCell.bgImageName}
               onFile={gridCell.setBackgroundImage}
               onRemoveFile={gridCell.removeBackgroundImage}
+              tooltipText={'Remove background image'}
             />
           </div>
         </FormGroup>

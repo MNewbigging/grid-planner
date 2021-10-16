@@ -14,6 +14,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { CellTemplate } from '../../../state/CellTemplate';
+import { StandardButton } from '../../common/buttons/StandardButton';
 
 import './cell-templates.scss';
 
@@ -46,7 +47,9 @@ export class CellTemplates extends React.Component<Props> {
       <NonIdealState
         icon={'duplicate'}
         title={'No templates'}
-        description={'Edit a cell and click the template button to create a new cell template'}
+        description={
+          'Edit a cell and click the template button at the top to create a new cell template'
+        }
       />
     );
   }
@@ -67,12 +70,24 @@ export class CellTemplates extends React.Component<Props> {
         </Text>
 
         <div className={'template-actions'}>
-          <Button icon={'style'} minimal outlined onClick={() => paintTemplate(template.id)} />
+          <StandardButton
+            icon={'style'}
+            minimal
+            outlined
+            onClick={() => paintTemplate(template.id)}
+            tooltipText={'Paint template'}
+          />
 
           <Popover2 content={this.renderTemplateNameEditor(template)}>
-            <Button icon={'edit'} minimal outlined />
+            <StandardButton icon={'edit'} minimal outlined tooltipText={'Edit template name'} />
           </Popover2>
-          <Button icon={'trash'} minimal outlined onClick={() => deleteTemplate(template.id)} />
+          <StandardButton
+            icon={'trash'}
+            minimal
+            outlined
+            onClick={() => deleteTemplate(template.id)}
+            tooltipText={'Delete template'}
+          />
         </div>
       </div>
     );

@@ -5,6 +5,7 @@ import React from 'react';
 import { Grid } from '../../../state/Grid';
 import { GridPlan } from '../../../state/GridPlan';
 import { DetailsPanelFocus } from '../../../state/GridPlannerState';
+import { StandardButton } from '../../common/buttons/StandardButton';
 
 import './grid-plan-details.scss';
 
@@ -57,14 +58,19 @@ export class GridPlanDetails extends React.Component<Props> {
           {grid.name}
         </div>
         <div className={'grid-actions'}>
-          <Button
+          <StandardButton
             icon={'edit'}
             onClick={() => {
               gridPlan.selectGrid(grid.id);
               setFocus(DetailsPanelFocus.GRID);
             }}
+            tooltipText={'Edit grid'}
           />
-          <Button icon={'trash'} onClick={() => gridPlan.deleteGrid(grid.id)} />
+          <StandardButton
+            icon={'trash'}
+            onClick={() => gridPlan.deleteGrid(grid.id)}
+            tooltipText={'Delete grid'}
+          />
         </div>
       </div>
     );

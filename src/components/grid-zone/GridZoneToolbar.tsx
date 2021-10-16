@@ -1,5 +1,4 @@
-import { Alignment, Button, Intent, Navbar, Position, Text } from '@blueprintjs/core';
-import { Tooltip2 } from '@blueprintjs/popover2';
+import { Alignment, Button, Navbar, Text } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
@@ -56,17 +55,19 @@ export class GridZoneToolbar extends React.Component<Props> {
         </Navbar.Group>
 
         <Navbar.Group align={Alignment.RIGHT} className={'view-controls'}>
-          <Button
+          <StandardButton
             icon={'grid'}
             minimal
             onClick={currentGrid.toggleGridLines}
             outlined={currentGrid.showGridLines}
+            tooltipText={'Toggle grid lines'}
           />
-          <Button
+          <StandardButton
             icon={'arrows-horizontal'}
             minimal
             onClick={currentGrid.toggleGridGap}
             outlined={currentGrid.showGridGap}
+            tooltipText={'Toggle grid gaps'}
           />
           <StandardButton
             icon={'eraser'}

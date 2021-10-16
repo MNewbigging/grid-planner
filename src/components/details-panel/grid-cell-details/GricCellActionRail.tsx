@@ -1,8 +1,8 @@
-import { Button } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { CellTemplate } from '../../../state/CellTemplate';
 import { GridCell } from '../../../state/GridCell';
+import { StandardButton } from '../../common/buttons/StandardButton';
 
 import './grid-cell-action-rail.scss';
 
@@ -19,13 +19,21 @@ export class GridCellActionRail extends React.Component<Props> {
 
     return (
       <div className={'grid-cell-action-rail'}>
-        <Button icon={'insert'} minimal outlined onClick={() => createTemplate()} />
+        <StandardButton
+          icon={'insert'}
+          minimal
+          outlined
+          onClick={() => createTemplate()}
+          tooltipText={'Create template'}
+        />
+
         {linkedTemplate && (
-          <Button
+          <StandardButton
             icon={'annotation'}
             minimal
             outlined
             onClick={() => linkedTemplate.updateTemplate(gridCell)}
+            tooltipText={'Update template'}
           />
         )}
       </div>
