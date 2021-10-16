@@ -5,6 +5,7 @@ import React from 'react';
 
 import { GridPlan } from '../../state/GridPlan';
 import { DetailsPanelFocus, GridPlannerState } from '../../state/GridPlannerState';
+import { StandardButton } from '../common/buttons/StandardButton';
 
 import './grid-zone-toolbar.scss';
 
@@ -67,11 +68,12 @@ export class GridZoneToolbar extends React.Component<Props> {
             onClick={currentGrid.toggleGridGap}
             outlined={currentGrid.showGridGap}
           />
-          <Button
+          <StandardButton
             icon={'eraser'}
             minimal
             outlined={plannerState.eraserActive}
             onClick={plannerState.toggleEraser}
+            tooltipText={'Erase cells'}
           />
 
           {isPainting && (

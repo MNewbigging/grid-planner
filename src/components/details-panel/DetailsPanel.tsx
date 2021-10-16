@@ -4,7 +4,7 @@ import React from 'react';
 
 import { DetailsPanelFocus, GridPlannerState } from '../../state/GridPlannerState';
 import { GridPlanDetails } from './grid-plan-details/GridPlanDetails';
-import { DetailsPanelHeading, DetailsPanelHeadingProps } from '../common/DetailsPanelHeading';
+import { DetailsPanelHeading, DetailsPanelHeadingProps } from './DetailsPanelHeading';
 import { GridDetails } from './grid-details/GridDetails';
 import { GridCellDetails } from './grid-cell-details/GridCellDetails';
 import { CellTemplates } from './cell-templates/CellTemplates';
