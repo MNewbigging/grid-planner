@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
+import { GridCellData } from '../model/GridCellData';
 import { BorderSettings } from './cell-settings/BorderSettings';
 import { TextSettings } from './cell-settings/TextSettings';
 import { CellTemplate } from './CellTemplate';
@@ -16,7 +17,6 @@ export class GridCell {
   @observable public leftBorderSettings: BorderSettings;
   @observable public bgImageName = '';
   @observable public textSettings: TextSettings;
-  @observable public templateId = '';
 
   constructor(id: string) {
     this.id = id;
@@ -46,7 +46,6 @@ export class GridCell {
     this.settings.backgroundColor = 'rgba(255, 255, 255, 1)';
     this.bgImageName = '';
     this.settings.backgroundImage = '';
-    this.templateId = '';
 
     this.textSettings.setDefaultValues();
     this.allBorderSettings.setDefaultValues();
@@ -78,6 +77,15 @@ export class GridCell {
     this.settings.backgroundImage = '';
     this.bgImageName = '';
   };
+
+  public toData(): GridCellData {
+    return {
+      id: this.id,
+      settings: this.settings,
+      bgImageName: this.bgImageName,
+      text: this.textSettings.text,
+    };
+  }
 
   private createBorderSettings() {
     this.allBorderSettings = new BorderSettings(this.updateAllBorders);

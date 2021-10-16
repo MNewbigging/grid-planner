@@ -1,4 +1,5 @@
 import { action, observable } from 'mobx';
+import { GridPlanData } from '../model/GridPlanData';
 import { RandomUtils } from '../utils/RandomUtils';
 import { Grid } from './Grid';
 
@@ -35,5 +36,12 @@ export class GridPlan {
     if (this.selectedGrid?.id === id) {
       this.selectedGrid = undefined;
     }
+  }
+
+  public toData(): GridPlanData {
+    return {
+      id: this.id,
+      grids: this.grids.map((grid) => grid.toData()),
+    };
   }
 }

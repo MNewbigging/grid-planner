@@ -1,4 +1,8 @@
+import { CSSProperties } from 'react';
+
 export interface GridCellData {
-  backgroundColor: string;
-  borderColor: string;
+  id: string;
+  settings: CSSProperties;
+  bgImageName: string;
+  text: string;
 }

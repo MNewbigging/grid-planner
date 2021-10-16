@@ -1,5 +1,10 @@
+import { GridCellData } from './GridCellData';
+
 export interface GridData {
   id: string;
   name: string;
-  size: number;
+  rows: number;
+  columns: number;
+  cellSize: number;
+  cells: GridCellData[];
 }

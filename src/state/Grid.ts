@@ -1,5 +1,6 @@
 import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
+import { GridData } from '../model/GridData';
 import { RandomUtils } from '../utils/RandomUtils';
 import { GridCell } from './GridCell';
 
@@ -80,6 +81,17 @@ export class Grid {
 
     this.settings.gap = this.showGridGap ? '1px' : '0px';
   };
+
+  public toData(): GridData {
+    return {
+      id: this.id,
+      name: this.name,
+      rows: this.rows,
+      columns: this.columns,
+      cellSize: this.cellSize,
+      cells: this.cells.map((cell) => cell.toData()),
+    };
+  }
 
   @action private updateGrid() {
     this.settings.gridTemplateColumns = `repeat(${this.columns}, minmax(0, ${this.cellSize}px))`;
