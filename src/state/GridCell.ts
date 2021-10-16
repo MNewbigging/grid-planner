@@ -90,7 +90,7 @@ export class GridCell {
     const { active, size, radius, color, type } = this.allBorderSettings;
 
     const borderShorthand = active ? `${size}px ${type} ${color}` : '';
-    const borderRadius = active ? `${radius}px` : '';
+    const borderRadius = active ? `${radius}%` : '';
 
     // Must check that the other borders aren't active; they take precedence
     if (!this.topBorderSettings.active) {
@@ -116,7 +116,7 @@ export class GridCell {
 
     if (active) {
       this.settings.borderTop = `${size}px ${type} ${color}`;
-      this.settings.borderTopRightRadius = `${radius}px`;
+      this.settings.borderTopRightRadius = `${radius}%`;
     } else {
       // Revert to all border settings
       this.updateAllBorders();
@@ -128,7 +128,7 @@ export class GridCell {
 
     if (active) {
       this.settings.borderRight = `${size}px ${type} ${color}`;
-      this.settings.borderBottomRightRadius = `${radius}px`;
+      this.settings.borderBottomRightRadius = `${radius}%`;
     } else {
       this.updateAllBorders();
     }
@@ -139,7 +139,7 @@ export class GridCell {
 
     if (active) {
       this.settings.borderBottom = `${size}px ${type} ${color}`;
-      this.settings.borderBottomLeftRadius = `${radius}px`;
+      this.settings.borderBottomLeftRadius = `${radius}%`;
     } else {
       this.updateAllBorders();
     }
@@ -150,7 +150,7 @@ export class GridCell {
 
     if (active) {
       this.settings.borderLeft = `${size}px ${type} ${color}`;
-      this.settings.borderTopLeftRadius = `${radius}px`;
+      this.settings.borderTopLeftRadius = `${radius}%`;
     } else {
       this.updateAllBorders();
     }
