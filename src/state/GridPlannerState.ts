@@ -119,4 +119,20 @@ export class GridPlannerState {
 
     this.currentAction = this.eraserActive ? CurrentAction.ERASING : CurrentAction.NONE;
   };
+
+  public saveGridPlan = () => {
+    if (!this.gridPlan) {
+      return;
+    }
+
+    const gridPlanData = this.gridPlan.toData();
+    const content = JSON.stringify(gridPlanData);
+
+    const file = new Blob([content], { type: 'text/plain' });
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = 'grid-plan.json';
+    a.click();
+  };
 }

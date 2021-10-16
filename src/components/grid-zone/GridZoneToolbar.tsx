@@ -32,6 +32,14 @@ export class GridZoneToolbar extends React.Component<Props> {
 
     return (
       <Navbar className={'grid-zone-toolbar'}>
+        <Navbar.Group align={Alignment.LEFT}>
+          <StandardButton
+            icon={'download'}
+            minimal
+            onClick={plannerState.saveGridPlan}
+            tooltipText={'Download grid plan'}
+          />
+        </Navbar.Group>
         <Navbar.Group align={Alignment.CENTER}>
           <Button
             icon={'chevron-left'}
