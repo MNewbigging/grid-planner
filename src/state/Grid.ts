@@ -34,7 +34,14 @@ export class Grid {
   }
 
   @action public selectCell(cell: GridCell) {
+    // Deselect the previous cell
+    if (this.selectedCell) {
+      this.selectedCell.selected = false;
+    }
+
+    // Select the new one
     this.selectedCell = cell;
+    this.selectedCell.selected = true;
   }
 
   public setCellSize = (size: number) => {

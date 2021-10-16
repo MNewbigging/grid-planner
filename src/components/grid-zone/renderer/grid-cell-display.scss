@@ -1,9 +1,33 @@
 @import '../../common/palette.scss';
 
 .grid-cell-display {
+  position: relative;
+
   cursor: pointer;
   background-position: center;
   background-size: cover;
 
   display: flex;
+
+  .selected-top-left {
+    z-index: 10;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    border-left: 2px solid red;
+    border-top: 2px solid red;
+    width: 30%;
+    height: 30%;
+  }
+
+  .selected-bot-right {
+    z-index: 10;
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    border-right: 2px solid red;
+    border-bottom: 2px solid red;
+    width: 30%;
+    height: 30%;
+  }
 }

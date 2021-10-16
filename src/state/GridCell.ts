@@ -7,6 +7,7 @@ import { CellTemplate } from './CellTemplate';
 
 export class GridCell {
   public id: string;
+  @observable public selected = false;
   @observable public settings: CSSProperties = {};
   @observable public allBorderSettings: BorderSettings;
   @observable public topBorderSettings: BorderSettings;

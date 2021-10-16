@@ -25,7 +25,11 @@ export class GridCellDisplay extends React.Component<Props> {
         onMouseEnter={onMouseEnter}
         onMouseDown={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
       >
+        {gridCell.selected && <div className={'selected-top-left'}></div>}
+
         <Text>{gridCell.textSettings.text}</Text>
+
+        {gridCell.selected && <div className={'selected-bot-right'}></div>}
       </div>
     );
   }
