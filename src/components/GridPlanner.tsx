@@ -68,7 +68,7 @@ export class GridPlanner extends React.Component {
               id={'load-file-input'}
               className={'load-file-input'}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                this.gridPlannerState.loadGridPlan(e.currentTarget.files);
+                this.gridPlannerState.readGridPlanFile(e.currentTarget.files);
                 e.target.value = null;
               }}
             />

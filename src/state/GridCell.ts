@@ -2,12 +2,13 @@ import { action, observable } from 'mobx';
 import { CSSProperties } from 'react';
 import { ColorResult } from 'react-color';
 import { GridCellData } from '../model/GridCellData';
+import { RandomUtils } from '../utils/RandomUtils';
 import { BorderSettings } from './cell-settings/BorderSettings';
 import { TextSettings } from './cell-settings/TextSettings';
 import { CellTemplate } from './CellTemplate';
 
 export class GridCell {
-  public id: string;
+  public id: string = RandomUtils.createId(12);
   @observable public selected = false;
   @observable public settings: CSSProperties = {};
   @observable public allBorderSettings: BorderSettings;
@@ -18,9 +19,7 @@ export class GridCell {
   @observable public bgImageName = '';
   @observable public textSettings: TextSettings;
 
-  constructor(id: string) {
-    this.id = id;
-
+  constructor() {
     this.createBorderSettings();
 
     this.textSettings = new TextSettings(this.settings);

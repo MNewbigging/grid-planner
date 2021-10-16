@@ -1,4 +1,5 @@
 import { action, observable } from 'mobx';
+import { GridPlanData } from '../model/GridPlanData';
 
 import { RandomUtils } from '../utils/RandomUtils';
 import { toastManager } from '../utils/ToastManager';
@@ -59,7 +60,7 @@ export class GridPlannerState {
 
   @action public createGridPlan() {
     // Create a new grid plan
-    const gridPlan = new GridPlan(RandomUtils.createId());
+    const gridPlan = new GridPlan();
 
     // Select it, focus on it
     this.gridPlan = gridPlan;
@@ -136,15 +137,22 @@ export class GridPlannerState {
     a.click();
   };
 
-  public loadGridPlan(fileList: FileList) {
+  public readGridPlanFile(fileList: FileList) {
     // Take first file
     const file = fileList.item(0);
     const reader = new FileReader();
 
     reader.onloadend = () => {
       console.log('json: ', reader.result);
+      const gridPlan: GridPlanData = JSON.parse(reader.result as string);
+
+      this.loadGridPlan(gridPlan);
     };
 
     reader.readAsText(file);
+  }
+
+  private loadGridPlan(gridPlanData: GridPlanData) {
+    console.log('gridPlan:', gridPlanData);
   }
 }

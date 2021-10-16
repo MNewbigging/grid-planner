@@ -5,7 +5,7 @@ import { RandomUtils } from '../utils/RandomUtils';
 import { GridCell } from './GridCell';
 
 export class Grid {
-  public id: string;
+  public id: string = RandomUtils.createId();
   @observable public name: string;
   public rows: number = 5;
   public columns: number = 5;
@@ -21,8 +21,7 @@ export class Grid {
     padding: '1px',
   };
 
-  constructor(id: string, name: string) {
-    this.id = id;
+  constructor(name: string) {
     this.name = name;
 
     this.createCells(this.rows, this.columns);
@@ -56,7 +55,7 @@ export class Grid {
     const tempCells: GridCell[] = [];
 
     for (let i = 0; i < rows * columns; i++) {
-      const cell = new GridCell(RandomUtils.createId(12));
+      const cell = new GridCell();
       tempCells.push(cell);
     }
 
